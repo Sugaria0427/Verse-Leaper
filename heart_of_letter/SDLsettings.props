@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ImportGroup Label="PropertySheets" />
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <IncludePath>E:\Codes\Homework\C++\Snake\SDL_bgi-3.0.3\src;E:\Codes\vc\SDL2-2.32.4\include;E:\Codes\vc\SDL2_ttf-2.24.0\include;E:\Codes\vc\SDL2_image-2.8.8\include;$(IncludePath)</IncludePath>
+    <ExternalIncludePath>E:\Codes\vc\SDL2_ttf-2.24.0\include;E:\Codes\vc\SDL2-2.32.4\include;E:\Codes\Homework\C++\Snake\SDL_bgi-3.0.3\src;E:\Codes\vc\SDL2_image-2.8.8\include;$(ExternalIncludePath)</ExternalIncludePath>
+    <LibraryPath>E:\Codes\vc\SDL2-2.32.4\lib\x64;E:\Codes\SDL2_mixer-2.8.1\lib\x64;E:\Codes\vc\SDL2_ttf-2.24.0\lib\x64;E:\Codes\vc\SDL2_image-2.8.8\lib\x64;E:\Codes\Homework\C++\Snake\SDL_bgi-3.0.3\build;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <Link>
+      <AdditionalLibraryDirectories>E:\Codes\vc\SDL2-2.32.4\lib\x64;E:\Codes\Homework\C++\Snake\SDL_bgi-3.0.3\build;E:\Codes\SDL2_mixer-2.8.1\lib\x64;E:\Codes\vc\SDL2_ttf-2.24.0\lib\x64;E:\Codes\vc\SDL2_image-2.8.8\lib\x64</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2_ttf.lib;SDL2_mixer.lib;SDL2_image.lib;SDL2main.lib;SDL2test.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(ProjectDir)\include</AdditionalIncludeDirectories>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup />
+</Project>

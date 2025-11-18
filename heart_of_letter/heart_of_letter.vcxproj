@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{12037336-0f22-4f27-92d8-d37c151ba871}</ProjectGuid>
+    <RootNamespace>heartofletter</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>$(IncludePath)</IncludePath>
+    <LibraryPath>$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>W:\AAuniversity\大二上\计算机\c++编程设计\SDL2_mixer-2.8.1\include;C:\Users\10340\OneDrive\桌面\诗境迁越\SDL2_mixer-2.8.1\include;C:\Users\10340\OneDrive\桌面\诗境迁越\SDL2-2.32.10\include;$(IncludePath)</IncludePath>
+    <LibraryPath>W:\AAuniversity\大二上\计算机\c++编程设计\SDL2_mixer-2.8.1\lib\x64;W:\AAuniversity\大二上\计算机\c++编程设计\SDL2-2.32.10\lib\x64;C:\Users\10340\OneDrive\桌面\诗境迁越\SDL2-2.32.10\lib\x64;C:\Users\10340\OneDrive\桌面\诗境迁越\SDL2_mixer-2.8.1\lib\x64;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <AdditionalIncludeDirectories>$(ProjectDir)thirdparty\SDL2-2.32.4\include;$(ProjectDir)thirdparty\SDL2_mixer-2.8.1\include;C:\Users\34964\Downloads\SDL2-2.32.10\include;C:\Users\34964\Downloads\SDL2_mixer-2.8.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>SDL2.lib;SDL2_mixer.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)thirdparty\SDL2_mixer-2.8.1\lib\x64;$(ProjectDir)thirdparty\SDL2-2.32.4\lib\x64;C:\Users\34964\Downloads\SDL2-2.32.10\lib\x64;C:\Users\34964\Downloads\SDL2_mixer-2.8.1\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <AdditionalIncludeDirectories>W:\AAuniversity\大二上\计算机\c++编程设计\SDL2_mixer-2.8.1\include;W:\AAuniversity\大二上\计算机\c++编程设计\SDL2-2.32.10\include;C:\Users\34964\Downloads\SDL2-2.32.10\include;C:\Users\34964\Downloads\SDL2_mixer-2.8.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>SDL2.lib;SDL2_mixer.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>W:\AAuniversity\大二上\计算机\c++编程设计\SDL2_mixer-2.8.1\lib\x64;W:\AAuniversity\大二上\计算机\c++编程设计\SDL2-2.32.10\lib\x64;C:\Users\34964\Downloads\SDL2-2.32.10\lib\x64;C:\Users\34964\Downloads\SDL2_mixer-2.8.1\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="Animation.cpp" />
+    <ClCompile Include="Atlas.cpp" />
+    <ClCompile Include="Bell.cpp" />
+    <ClCompile Include="Block.cpp" />
+    <ClCompile Include="BossStates.cpp" />
+    <ClCompile Include="Box.cpp" />
+    <ClCompile Include="Button.cpp" />
+    <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="CollisionBox.cpp" />
+    <ClCompile Include="CollisionManager.cpp" />
+    <ClCompile Include="DialogueBox.cpp" />
+    <ClCompile Include="Drawable.cpp" />
+    <ClCompile Include="DropItem.cpp" />
+    <ClCompile Include="Drum.cpp" />
+    <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="EnemyDogStates.cpp" />
+    <ClCompile Include="EnemyEagleStates.cpp" />
+    <ClCompile Include="EnemyTigerStates.cpp" />
+    <ClCompile Include="Enemy_sub.cpp" />
+    <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="GameObjectManager.cpp" />
+    <ClCompile Include="GameObjFactory.cpp" />
+    <ClCompile Include="GameScene.cpp" />
+    <ClCompile Include="Image.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Map.cpp" />
+    <ClCompile Include="MapManager.cpp" />
+    <ClCompile Include="Maps.cpp" />
+    <ClCompile Include="MenuScene.cpp" />
+    <ClCompile Include="Npc.cpp" />
+    <ClCompile Include="OptionScene.cpp" />
+    <ClCompile Include="Panel.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerArrowState.cpp" />
+    <ClCompile Include="PlayerIdleState.cpp" />
+    <ClCompile Include="PlayerJumpState.cpp" />
+    <ClCompile Include="PlayerRunState.cpp" />
+    <ClCompile Include="Renderer.cpp" />
+    <ClCompile Include="ResourceManager.cpp" />
+    <ClCompile Include="Scene.cpp" />
+    <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="StateMacine.cpp" />
+    <ClCompile Include="StateNode.cpp" />
+    <ClCompile Include="Timer.cpp" />
+    <ClCompile Include="Updatable.cpp" />
+    <ClCompile Include="Vector2.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Animation.h" />
+    <ClInclude Include="Atlas.h" />
+    <ClInclude Include="Bell.h" />
+    <ClInclude Include="Block.h" />
+    <ClInclude Include="BossStates.h" />
+    <ClInclude Include="Box.h" />
+    <ClInclude Include="Button.h" />
+    <ClInclude Include="Camera.h" />
+    <ClInclude Include="CollisionBox.h" />
+    <ClInclude Include="CollisionManager.h" />
+    <ClInclude Include="DialogueBox.h" />
+    <ClInclude Include="Drawable.h" />
+    <ClInclude Include="DropItem.h" />
+    <ClInclude Include="Drum.h" />
+    <ClInclude Include="Enemy.h" />
+    <ClInclude Include="EnemyDogStates.h" />
+    <ClInclude Include="EnemyEagleStates.h" />
+    <ClInclude Include="EnemyTigerStates.h" />
+    <ClInclude Include="Enemy_sub.h" />
+    <ClInclude Include="Entity.h" />
+    <ClInclude Include="GameObject.h" />
+    <ClInclude Include="GameObjectManager.h" />
+    <ClInclude Include="GameObjFactory.h" />
+    <ClInclude Include="GameScene.h" />
+    <ClInclude Include="Image.h" />
+    <ClInclude Include="mainHead.h" />
+    <ClInclude Include="Map.h" />
+    <ClInclude Include="MapManager.h" />
+    <ClInclude Include="Maps.h" />
+    <ClInclude Include="MenuScene.h" />
+    <ClInclude Include="MouseInput.h" />
+    <ClInclude Include="Npc.h" />
+    <ClInclude Include="OptionScene.h" />
+    <ClInclude Include="Panel.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerArrowState.h" />
+    <ClInclude Include="PlayerIdleState.h" />
+    <ClInclude Include="PlayerJumpState.h" />
+    <ClInclude Include="PlayerRunState.h" />
+    <ClInclude Include="Poster.h" />
+    <ClInclude Include="Renderer.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="ResourceManager.h" />
+    <ClInclude Include="Scene.h" />
+    <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="SDLInitException.h" />
+    <ClInclude Include="StateMacine.h" />
+    <ClInclude Include="StateNode.h" />
+    <ClInclude Include="Tag.h" />
+    <ClInclude Include="Timer.h" />
+    <ClInclude Include="Updatable.h" />
+    <ClInclude Include="utils.h" />
+    <ClInclude Include="Vector2.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="heart_of_letter.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="atlas\block_Grass_0.bmp" />
+    <Image Include="atlas\character_0.bmp" />
+    <Image Include="atlas\character_1.bmp" />
+    <Image Include="image\GameBackground.bmp" />
+    <Image Include="image\MenuBackground.bmp" />
+    <Image Include="image\menu_continue.bmp" />
+    <Image Include="image\menu_option.bmp" />
+    <Image Include="image\menu_quit.bmp" />
+    <Image Include="image\menu_start.bmp" />
+    <Image Include="image\OptionBackground.bmp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

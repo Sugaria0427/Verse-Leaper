@@ -1,0 +1,407 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="资源文件\background">
+      <UniqueIdentifier>{b8493523-32fd-4fe4-95a3-1ff8fd49c472}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\button">
+      <UniqueIdentifier>{b394ebe4-6bf3-49c1-acf0-a46d3288df62}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="gameObject">
+      <UniqueIdentifier>{b508f0fd-1720-405f-b1b2-c7170b4e0a1e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="renderer">
+      <UniqueIdentifier>{92fbc7af-d0e4-4c1e-8e08-b363a7a13f3f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main">
+      <UniqueIdentifier>{faaeaf21-ed3c-48e0-8f73-a5a7576610e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="box">
+      <UniqueIdentifier>{ff9ebc62-650c-4644-9e6c-e4f4df253c07}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="box\collide">
+      <UniqueIdentifier>{d9b306bd-8740-4227-b125-fcd0bfa1a5ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="scene">
+      <UniqueIdentifier>{37d591a6-8c97-4246-ac49-8d83789a077e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="gameObject\Entity">
+      <UniqueIdentifier>{4cc19ed3-55ba-4624-94e1-015641216dd5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="base">
+      <UniqueIdentifier>{47ffc0d3-96dd-45f1-9951-ba0df92afbd9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="base\interface">
+      <UniqueIdentifier>{df5c38f4-745c-4c28-b944-3fcdc8571017}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="base\image">
+      <UniqueIdentifier>{072831d5-9b53-49e7-8c13-0103a12393b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="StateNode">
+      <UniqueIdentifier>{cc71d58b-7987-4984-9966-83dcb7976989}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="StateNode\Player">
+      <UniqueIdentifier>{a3d036a3-c9c6-4133-8580-3b383145aa8a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="StateNode\Enemy">
+      <UniqueIdentifier>{715fb3ed-e1ce-4917-bd09-86425ebb6700}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="StateNode\Enemy\Dog">
+      <UniqueIdentifier>{192f4a95-6712-40c1-9fdd-25f8c4f56f2c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Map">
+      <UniqueIdentifier>{978d7aed-e777-4f57-9ad2-e8e84985c79f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="StateNode\Enemy\Eagle">
+      <UniqueIdentifier>{2c560a6c-f87e-4dd5-ad54-614fb76abb5d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="StateNode\Enemy\Tiger">
+      <UniqueIdentifier>{2e3eb359-8bdc-45d2-8f22-49017661f616}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="gameObject\Entity\Enemy">
+      <UniqueIdentifier>{8efbfcd5-a260-4881-a998-25a5240f8ece}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="StateNode\Enemy\Boss">
+      <UniqueIdentifier>{f22119b3-f03a-45c3-8054-caf8eeeaa80d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Renderer.cpp">
+      <Filter>renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector2.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="Drawable.cpp">
+      <Filter>base\interface</Filter>
+    </ClCompile>
+    <ClCompile Include="Updatable.cpp">
+      <Filter>base\interface</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation.cpp">
+      <Filter>base\image</Filter>
+    </ClCompile>
+    <ClCompile Include="Atlas.cpp">
+      <Filter>base\image</Filter>
+    </ClCompile>
+    <ClCompile Include="Image.cpp">
+      <Filter>base\image</Filter>
+    </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>box</Filter>
+    </ClCompile>
+    <ClCompile Include="Box.cpp">
+      <Filter>box</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>main</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionBox.cpp">
+      <Filter>box\collide</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionManager.cpp">
+      <Filter>box\collide</Filter>
+    </ClCompile>
+    <ClCompile Include="Block.cpp">
+      <Filter>gameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>scene</Filter>
+    </ClCompile>
+    <ClCompile Include="OptionScene.cpp">
+      <Filter>scene</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuScene.cpp">
+      <Filter>scene</Filter>
+    </ClCompile>
+    <ClCompile Include="GameScene.cpp">
+      <Filter>scene</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="DropItem.cpp">
+      <Filter>gameObject\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="Npc.cpp">
+      <Filter>gameObject\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>gameObject\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>gameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObjectManager.cpp">
+      <Filter>gameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Timer.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="DialogueBox.cpp">
+      <Filter>box</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObjFactory.cpp">
+      <Filter>gameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="StateNode.cpp">
+      <Filter>StateNode</Filter>
+    </ClCompile>
+    <ClCompile Include="StateMacine.cpp">
+      <Filter>StateNode</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerIdleState.cpp">
+      <Filter>StateNode\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerRunState.cpp">
+      <Filter>StateNode\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerJumpState.cpp">
+      <Filter>StateNode\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyDogStates.cpp">
+      <Filter>StateNode\Enemy\Dog</Filter>
+    </ClCompile>
+    <ClCompile Include="Map.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="MapManager.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="Maps.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyEagleStates.cpp">
+      <Filter>StateNode\Enemy\Eagle</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyTigerStates.cpp">
+      <Filter>StateNode\Enemy\Tiger</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity.cpp">
+      <Filter>gameObject\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>gameObject\Entity\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy_sub.cpp">
+      <Filter>gameObject\Entity\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerArrowState.cpp">
+      <Filter>StateNode\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="BossStates.cpp">
+      <Filter>StateNode\Enemy\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="Panel.cpp">
+      <Filter>main</Filter>
+    </ClCompile>
+    <ClCompile Include="Drum.cpp">
+      <Filter>gameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Bell.cpp">
+      <Filter>gameObject\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceManager.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Renderer.h">
+      <Filter>renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="MouseInput.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>资源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector2.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="Drawable.h">
+      <Filter>base\interface</Filter>
+    </ClInclude>
+    <ClInclude Include="Updatable.h">
+      <Filter>base\interface</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>base\image</Filter>
+    </ClInclude>
+    <ClInclude Include="Atlas.h">
+      <Filter>base\image</Filter>
+    </ClInclude>
+    <ClInclude Include="Image.h">
+      <Filter>base\image</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.h">
+      <Filter>box</Filter>
+    </ClInclude>
+    <ClInclude Include="Box.h">
+      <Filter>box</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionBox.h">
+      <Filter>box\collide</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionManager.h">
+      <Filter>box\collide</Filter>
+    </ClInclude>
+    <ClInclude Include="Block.h">
+      <Filter>gameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>scene</Filter>
+    </ClInclude>
+    <ClInclude Include="OptionScene.h">
+      <Filter>scene</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuScene.h">
+      <Filter>scene</Filter>
+    </ClInclude>
+    <ClInclude Include="GameScene.h">
+      <Filter>scene</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneManager.h">
+      <Filter>scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="DropItem.h">
+      <Filter>gameObject\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity.h">
+      <Filter>gameObject\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Npc.h">
+      <Filter>gameObject\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>gameObject\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>gameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObjectManager.h">
+      <Filter>gameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="DialogueBox.h">
+      <Filter>box</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObjFactory.h">
+      <Filter>gameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="StateNode.h">
+      <Filter>StateNode</Filter>
+    </ClInclude>
+    <ClInclude Include="StateMacine.h">
+      <Filter>StateNode</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerIdleState.h">
+      <Filter>StateNode\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerRunState.h">
+      <Filter>StateNode\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerJumpState.h">
+      <Filter>StateNode\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyDogStates.h">
+      <Filter>StateNode\Enemy\Dog</Filter>
+    </ClInclude>
+    <ClInclude Include="Tag.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="Poster.h">
+      <Filter>gameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Map.h">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="MapManager.h">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Maps.h">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyEagleStates.h">
+      <Filter>StateNode\Enemy\Eagle</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyTigerStates.h">
+      <Filter>StateNode\Enemy\Tiger</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>gameObject\Entity\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy_sub.h">
+      <Filter>gameObject\Entity\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="utils.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerArrowState.h">
+      <Filter>StateNode\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="BossStates.h">
+      <Filter>StateNode\Enemy\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="mainHead.h">
+      <Filter>main</Filter>
+    </ClInclude>
+    <ClInclude Include="SDLInitException.h" />
+    <ClInclude Include="Panel.h">
+      <Filter>main</Filter>
+    </ClInclude>
+    <ClInclude Include="Drum.h">
+      <Filter>gameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Bell.h">
+      <Filter>gameObject\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceManager.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="heart_of_letter.rc">
+      <Filter>资源文件</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="image\GameBackground.bmp">
+      <Filter>资源文件\background</Filter>
+    </Image>
+    <Image Include="image\menu_continue.bmp">
+      <Filter>资源文件\button</Filter>
+    </Image>
+    <Image Include="image\menu_option.bmp">
+      <Filter>资源文件\button</Filter>
+    </Image>
+    <Image Include="image\menu_quit.bmp">
+      <Filter>资源文件\button</Filter>
+    </Image>
+    <Image Include="image\menu_start.bmp">
+      <Filter>资源文件\button</Filter>
+    </Image>
+    <Image Include="image\OptionBackground.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="atlas\character_0.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="atlas\character_1.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="image\MenuBackground.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="atlas\block_Grass_0.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+  </ItemGroup>
+</Project>
