@@ -1,9 +1,8 @@
-﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.14.36121.58 d17.14
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "heart_of_letter", "heart_of_letter\heart_of_letter.vcxproj", "{12037336-0F22-4F27-92D8-D37C151BA871}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Verse_Leaper", "Verse_Leaper\Verse_Leaper.vcxproj", "{12037336-0F22-4F27-92D8-D37C151BA871}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

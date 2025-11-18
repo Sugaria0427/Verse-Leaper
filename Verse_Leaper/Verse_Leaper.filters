@@ -368,7 +368,7 @@
     <ClInclude Include="ResourceManager.h" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="heart_of_letter.rc">
+    <ResourceCompile Include="Verse_Leaper.rc">
       <Filter>资源文件</Filter>
     </ResourceCompile>
   </ItemGroup>
