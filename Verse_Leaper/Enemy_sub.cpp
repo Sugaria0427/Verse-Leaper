@@ -1,5 +1,5 @@
-#include "Panel.h"
 #include "Enemy_sub.h"
+#include "Panel.h"
 #include "EnemyDogStates.h"
 #include "EnemyEagleStates.h"
 #include "EnemyTigerStates.h"
@@ -7,16 +7,15 @@
 #include "GameObjectManager.h"
 #include "ResourceManager.h"
 
-
-EnemyDog::EnemyDog(Tag _tag, Animation* _animation, Box* _EnemyBox) : Enemy(_tag, _animation, _EnemyBox) {
+Dog::Dog(Tag _tag, Animation* _animation, Box* _EnemyBox) : Enemy(_tag, _animation, _EnemyBox) {
     initDog();
 }
 
-EnemyDog::EnemyDog(const EnemyDog& dog) : Enemy(dog), chaseRange(dog.chaseRange) { 
+Dog::Dog(const Dog& dog) : Enemy(dog), chaseRange(dog.chaseRange) { 
     initDog(); 
 }
 
-void EnemyDog::initDog()
+void Dog::initDog()
 {
     // 初始化chaseRange
     this->chaseRange = Box(this->getBoxCenterX() - chaseRange.getWidth() / 2,
@@ -26,17 +25,17 @@ void EnemyDog::initDog()
     this->setAD(1);
     /// 有限状态机
     {
-        stateMacine = StateMacine();
-        stateMacine.addStateNode("Patrol", new EnemyDogPatrolState(this));
-        stateMacine.addStateNode("Chase", new EnemyDogChaseState(this));
-        stateMacine.addStateNode("Goback", new EnemyDogGobakState(this));
-        stateMacine.addStateNode("Dead", new EnemyDogDeadState(this));
-        stateMacine.addStateNode("Hurt", new EnemyDogHurtState(this));
-        stateMacine.setInitState("Patrol");
+        stateMachine = StateMachine();
+        stateMachine.addStateNode("Patrol", new EnemyDogPatrolState(this));
+        stateMachine.addStateNode("Chase", new EnemyDogChaseState(this));
+        stateMachine.addStateNode("Goback", new EnemyDogGobakState(this));
+        stateMachine.addStateNode("Dead", new EnemyDogDeadState(this));
+        stateMachine.addStateNode("Hurt", new EnemyDogHurtState(this));
+        stateMachine.setInitState("Patrol");
     }
 }
 
-void EnemyDog::update(int delta) {
+void Dog::update(int delta) {
     if (isExist()) {
         Enemy::update(delta);
         // 更新追逐范围
@@ -47,15 +46,15 @@ void EnemyDog::update(int delta) {
     }
 }
 
-EnemyEagle::EnemyEagle(Tag _tag, Animation* _animation, Box* _EnemyBox) : Enemy(_tag, _animation, _EnemyBox) {
+Eagle::Eagle(Tag _tag, Animation* _animation, Box* _EnemyBox) : Enemy(_tag, _animation, _EnemyBox) {
     initEagle();
 }
 
-EnemyEagle::EnemyEagle(const EnemyEagle& Eagle) : Enemy(Eagle) { 
+Eagle::Eagle(const Eagle& Eagle) : Enemy(Eagle) { 
     initEagle(); 
 }
 
-void EnemyEagle::initEagle()
+void Eagle::initEagle()
 {
     // 初始化patorlRange
     this->patrolRange = Box(this->getBoxCenterX() - patrolRange.getWidth() / 2,
@@ -66,15 +65,15 @@ void EnemyEagle::initEagle()
     this->setGravity(0, 0); // 飞行敌人不受重力影响
     /// 有限状态机
     {
-        stateMacine = StateMacine();
-        stateMacine.addStateNode("Patrol", new EnemyEaglePatrolState(this));
-        stateMacine.addStateNode("Dead", new EnemyEagleDeadState(this));
-        stateMacine.addStateNode("Hurt", new EnemyEagleHurtState(this));
-        stateMacine.setInitState("Patrol");
+        stateMachine = StateMachine();
+        stateMachine.addStateNode("Patrol", new EnemyEaglePatrolState(this));
+        stateMachine.addStateNode("Dead", new EnemyEagleDeadState(this));
+        stateMachine.addStateNode("Hurt", new EnemyEagleHurtState(this));
+        stateMachine.setInitState("Patrol");
     }
 }
 
-void EnemyEagle::update(int delta)
+void Eagle::update(int delta)
 {
     if (isExist()) {
         Enemy::update(delta);
@@ -86,16 +85,16 @@ void EnemyEagle::update(int delta)
 	}
 }
 
-EnemyTiger::EnemyTiger(Tag _tag, Animation* _animation, Box* _EnemyBox) : Enemy(_tag, _animation, _EnemyBox) {
+Tiger::Tiger(Tag _tag, Animation* _animation, Box* _EnemyBox) : Enemy(_tag, _animation, _EnemyBox) {
     initTiger();
 }
 
-EnemyTiger::EnemyTiger(const EnemyTiger& tiger)
+Tiger::Tiger(const Tiger& tiger)
     : Enemy(tiger), attackRange(tiger.attackRange), jumpRange(tiger.jumpRange) {
     initTiger();
 }
 
-void EnemyTiger::initTiger()
+void Tiger::initTiger()
 {
     // 初始化攻击动画
     this->biteBoxAnimation = Animation(ResourceManager::Instance().getAtlas(AtlasType::atlasEnemyTigerBiteBoxRight), 300);
@@ -124,24 +123,24 @@ void EnemyTiger::initTiger()
     }
     /// 有限状态机
     {
-        stateMacine = StateMacine();
-        stateMacine.addStateNode("Idle", new EnemyTigerIdleState(this));
-        stateMacine.addStateNode("Attack", new EnemyTigerAttackState(this));
-        stateMacine.addStateNode("Move", new EnemyTigerMoveState(this));
-        stateMacine.addStateNode("Jump", new EnemyTigerJumpState(this));
-        stateMacine.addStateNode("Dead", new EnemyTigerDeadState(this));
-        stateMacine.setInitState("Idle");
+        stateMachine = StateMachine();
+        stateMachine.addStateNode("Idle", new EnemyTigerIdleState(this));
+        stateMachine.addStateNode("Attack", new EnemyTigerAttackState(this));
+        stateMachine.addStateNode("Move", new EnemyTigerMoveState(this));
+        stateMachine.addStateNode("Jump", new EnemyTigerJumpState(this));
+        stateMachine.addStateNode("Dead", new EnemyTigerDeadState(this));
+        stateMachine.setInitState("Idle");
     }
 }
 
-GameObject* EnemyTiger::clone() {
+GameObject* Tiger::clone() {
     this->initEntityBox();
     this->initEnemy();
     this->initTiger();
     return this;
 }
 
-void EnemyTiger::update(int delta) {
+void Tiger::update(int delta) {
     if (isExist()) {
         this->biteBoxAnimation.updateIdxFrame(delta);
         Enemy::update(delta);
@@ -157,7 +156,7 @@ void EnemyTiger::update(int delta) {
     }
 }
 
-void EnemyTiger::draw(SDL_Renderer* SDL_renderer) {
+void Tiger::draw(SDL_Renderer* SDL_renderer) {
     Enemy::draw(SDL_renderer);
     //// 绘制跳跃范围（绿色）
     //SDL_SetRenderDrawColor(SDL_renderer, 0, 255, 0, 255);
@@ -186,17 +185,17 @@ void EnemyTiger::draw(SDL_Renderer* SDL_renderer) {
     }
 }
 
-EnemyBoss::EnemyBoss(Tag _tag, Animation* _animation, Box* _EnemyBox) : Enemy(_tag, _animation, _EnemyBox)
+Boss::Boss(Tag _tag, Animation* _animation, Box* _EnemyBox) : Enemy(_tag, _animation, _EnemyBox)
 {
     initBoss();
 }
 
-EnemyBoss::EnemyBoss(const EnemyBoss& tiger) : Enemy(tiger)
+Boss::Boss(const Boss& tiger) : Enemy(tiger)
 {
     initBoss();
 }
 
-void EnemyBoss::initBoss()
+void Boss::initBoss()
 {
     this->setGravity(0, 0); // Boss不受重力影响
     // 初始化攻击动画
@@ -226,7 +225,7 @@ void EnemyBoss::initBoss()
         barrage->setCollidable(false);
     }
     /// 基础属性
-    this->setHP(10);
+    this->setHP(2);
     this->setAD(1);
     this->laserRange = Box(this->getBoxCenterX() - laserRange.getWidth() / 2,
         this->getBoxCenterY() - this->getBoxHeight(),
@@ -234,24 +233,25 @@ void EnemyBoss::initBoss()
     );
     /// 有限状态机
     {
-        stateMacine = StateMacine();
-        stateMacine.addStateNode("Idle", new BossIdleState(this));
-        stateMacine.addStateNode("Laser", new BossLaserState(this));
-        stateMacine.addStateNode("Weak", new BossWeakState(this));
-        stateMacine.addStateNode("Move", new BossMoveState(this));
-        stateMacine.addStateNode("Barrage", new BossBarrageState(this));
-        stateMacine.setInitState("Idle");
+        stateMachine = StateMachine();
+        stateMachine.addStateNode("Idle", new BossIdleState(this));
+        stateMachine.addStateNode("Laser", new BossLaserState(this));
+        stateMachine.addStateNode("Weak", new BossWeakState(this));
+        stateMachine.addStateNode("Move", new BossMoveState(this));
+        stateMachine.addStateNode("Barrage", new BossBarrageState(this));
+        stateMachine.addStateNode("Dead", new BossDeadState(this));
+        stateMachine.setInitState("Idle");
     }
 }
 
-GameObject* EnemyBoss::clone() {
+GameObject* Boss::clone() {
     this->initEntityBox();
     this->initEnemy();
     this->initBoss();
     return this;
 }
 
-void EnemyBoss::update(int delta) {
+void Boss::update(int delta) {
     if (isExist()) {
         Enemy::update(delta);
         // 更新激光范围位置
@@ -285,7 +285,7 @@ void EnemyBoss::update(int delta) {
     }
 }
 
-void EnemyBoss::draw(SDL_Renderer* SDL_renderer) {
+void Boss::draw(SDL_Renderer* SDL_renderer) {
     Enemy::draw(SDL_renderer);
     //// 绘制激光范围（绿色）
     //SDL_SetRenderDrawColor(SDL_renderer, 0, 255, 0, 255);

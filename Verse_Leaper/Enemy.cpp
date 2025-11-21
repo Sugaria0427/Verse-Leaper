@@ -3,10 +3,6 @@
 #include "EnemyDogStates.h"
 #include "EnemyEagleStates.h"
 
-extern Camera* camera;
-extern Atlas* atlasDropItem_Alcohol;
-extern Atlas* atlasDropItem_DoubleJump;
-
 Enemy::Enemy(Tag _tag, Animation* _animation,  Box* _EnemyBox)
     : Entity(_tag, _animation, _EnemyBox) {
     initEnemy();

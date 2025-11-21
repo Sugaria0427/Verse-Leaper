@@ -1,4 +1,5 @@
 #include "MapManager.h"
+#include "Maps.h"
 
 MapManager* MapManager::mapManager_ = nullptr;
 
@@ -6,6 +7,16 @@ MapManager* MapManager::instance() {
     if (!mapManager_) 
         mapManager_ = new MapManager();
     return mapManager_;
+}
+
+void MapManager::creatMaps()
+{
+    MapManager::instance()->addMap("InitialMap", new InitialMap(42 * 150, 13 * 150));
+    MapManager::instance()->addMap("TowerMap", new TowerMap(22 * 150, 11 * 150));
+    MapManager::instance()->addMap("TransitionMap", new TransitionMap(46 * 150, 20 * 150));
+    MapManager::instance()->addMap("TigerMap", new TigerMap(28 * 150, 10 * 150));
+    MapManager::instance()->addMap("CloudMap", new CloudMap(37 * 150, 23 * 150));
+    MapManager::instance()->addMap("BossMap", new BossMap(36 * 150, 21 * 150));
 }
 
 void MapManager::setInitialMap(std::string mapName)

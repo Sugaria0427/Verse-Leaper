@@ -38,12 +38,12 @@ GameObject* Block::clone() {
         this->initCollisionBox();
         return this;
         break;
-    case Tag::Block_Cloud1:
+    case Tag::Block_Cloud_Red:
         block = new Block(*this);
         block->setExist(false);
         return block;
         break;
-    case Tag::Block_Cloud2:
+    case Tag::Block_Cloud_Blue:
         block = new Block(*this);
         block->setExist(false);
         return block;
@@ -107,10 +107,10 @@ void Block::initCollisionBox()
             case Tag::Block_Ice:
                 ResourceManager::Instance().getSound(SoundType::run) = ResourceManager::Instance().getSound(SoundType::run_ice);
                 break;
-            case Tag::Block_Cloud1:
+            case Tag::Block_Cloud_Red:
                 ResourceManager::Instance().getSound(SoundType::run) = ResourceManager::Instance().getSound(SoundType::run_cloud);
                 break;
-            case Tag::Block_Cloud2:
+            case Tag::Block_Cloud_Blue:
                 ResourceManager::Instance().getSound(SoundType::run) = ResourceManager::Instance().getSound(SoundType::run_cloud);
                 break;
             case Tag::Block_JumpPad:

@@ -1,6 +1,6 @@
 #include "GameObjFactory.h"
-#include "Enemy_sub.h"
 #include "ResourceManager.h"
+#include "Enemy_sub.h"
 
 GameObjFactory* GameObjFactory::gameObjFactory = nullptr;
 
@@ -16,7 +16,6 @@ Npc* GameObjFactory::createNpc(Tag tag, int x, int y)
     Npc* temp;
     switch(tag) {
     case Tag::Npc_SuShi_Old_giveArrow:
-        
 		temp = new Npc(tag, new Animation(ResourceManager::Instance().getAtlas(AtlasType::atlasNpcSuShi_old), 300), new Box(x, y, 230, 230));
         return temp;
 		break;
@@ -46,19 +45,19 @@ Enemy* GameObjFactory::createEnemy(Tag tag, int x, int y)
 	Enemy* temp;
     switch(tag) {
     case Tag::Enemy_Dog:
-        temp = new EnemyDog(tag, new Animation(ResourceManager::Instance().getAtlas(AtlasType::atlasEnemyDog), 300), new Box(x, y, 250, 200));
+        temp = new Dog(tag, new Animation(ResourceManager::Instance().getAtlas(AtlasType::atlasEnemyDogRunRight), 300), new Box(x, y, 250, 200));
         return temp;
         break;
     case Tag::Enemy_Eagle:
-        temp = new EnemyEagle(tag, new Animation(ResourceManager::Instance().getAtlas(AtlasType::atlasEnemyEagle), 300), new Box(x, y, 250, 200));
+        temp = new Eagle(tag, new Animation(ResourceManager::Instance().getAtlas(AtlasType::atlasEnemyEagleFlyRight), 300), new Box(x, y, 250, 200));
         return temp;
         break;
     case Tag::Enemy_Tiger:
-        temp = new EnemyTiger(tag, new Animation(ResourceManager::Instance().getAtlas(AtlasType::atlasEnemyTigerIdleLeft), 300), new Box(x, y, 500, 400));
+        temp = new Tiger(tag, new Animation(ResourceManager::Instance().getAtlas(AtlasType::atlasEnemyTigerIdleLeft), 300), new Box(x, y, 500, 400));
         return temp;
         break;
     case Tag::Enemy_Boss:
-        temp = new EnemyBoss(tag, new Animation(ResourceManager::Instance().getAtlas(AtlasType::atlasEnemyBossIdle), 500), new Box(x, y, 1200, 1000));
+        temp = new Boss(tag, new Animation(ResourceManager::Instance().getAtlas(AtlasType::atlasEnemyBossIdle), 500), new Box(x, y, 1200, 1000));
         return temp;
         break;
     default:
@@ -94,13 +93,13 @@ Block* GameObjFactory::createBlock(Tag tag, int x, int y)
         temp = new Block(tag, new Animation(ResourceManager::Instance().getAtlas(AtlasType::atlasBlock_Ice), 1000), new Box(x, y, width, height));
         return temp;
         break;
-    case Tag::Block_Cloud1:
-        temp = new Block(tag, new Animation(ResourceManager::Instance().getAtlas(AtlasType::atlasBlock_Cloud1), 1000), new Box(x, y, width, height));
+    case Tag::Block_Cloud_Red:
+        temp = new Block(tag, new Animation(ResourceManager::Instance().getAtlas(AtlasType::atlasBlock_Cloud_Red), 1000), new Box(x, y, width, height));
         temp->setExist(false);
         return temp;
         break;
-    case Tag::Block_Cloud2:
-        temp = new Block(tag, new Animation(ResourceManager::Instance().getAtlas(AtlasType::atlasBlock_Cloud2), 1000), new Box(x, y, width, height));
+    case Tag::Block_Cloud_Blue:
+        temp = new Block(tag, new Animation(ResourceManager::Instance().getAtlas(AtlasType::atlasBlock_Cloud_Blue), 1000), new Box(x, y, width, height));
         temp->setExist(false);
         return temp;
         break;

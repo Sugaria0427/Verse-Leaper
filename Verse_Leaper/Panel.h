@@ -1,7 +1,7 @@
 #pragma once
 #include<SDL.h>
 #include<SDL_mixer.h>
-#include "SDLInitException.h"
+#include<iostream>
 
 class Camera;
 
@@ -12,26 +12,39 @@ private:
     ~Panel();
 
 public:
-    static Panel& Instance() {
-        static Panel panel;
-        return panel;
-    }
+    static Panel& Instance();
 
-public:
     void initSDL();
-private:
-    void initSDLAudio();
-    void initSDLWindow();
-    void initSDLRenderer();
+
+    void initAudioAndScenes();
 
 public:
-    SDL_Renderer* getSDLRenderer() const { return SDL_renderer; }
-    SDL_Window* getSDLWindow() const { return win; }
-    Camera* getCamera() const { return camera; }
-    SDL_Event& getEvent() { return event; }
+    SDL_Renderer* getSDLRenderer() const;
+    SDL_Window* getSDLWindow() const;
+    Camera* getCamera() const;
+    SDL_Event& getEvent();
+    bool isRunning() const;
+    void setRunning(bool running);
+
 private:
     SDL_Window* win = nullptr;
     SDL_Renderer* SDL_renderer = nullptr;
     Camera* camera = nullptr;
     SDL_Event event;
+    bool isRunning_ = true;
+
+private:
+    // 初始化SDL子函数
+    void initSDLAudio();
+    void initSDLWindow();
+    void initSDLRenderer();
+
+private:
+    // 初始化音频和场景子函数
+    void initAudio();
+    void creatScenes();
+    void creatMenuScene();
+    void creatGameScene();
+    void creatOptionScene();
 };
+

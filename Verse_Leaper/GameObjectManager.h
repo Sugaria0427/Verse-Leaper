@@ -1,7 +1,7 @@
 #pragma once
-#include<vector>
-#include "GameObject.h"
-#include "MapManager.h"
+#include <vector>
+
+class GameObject;
 
 class GameObjManager
 {

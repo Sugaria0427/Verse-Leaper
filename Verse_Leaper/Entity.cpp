@@ -7,7 +7,7 @@ Entity::Entity(Tag tag_, Animation* _animation, Box* _NpcBox, int _HP, int _AD, 
 void Entity::update(int delta) {
     if (isExist_) {
         // 状态机更新
-        stateMacine.update(delta);
+        stateMachine.update(delta);
 
         this->setOnFloor(false);
         // 下坠
@@ -20,6 +20,8 @@ void Entity::update(int delta) {
         this->entityBox->setBoxPosition(this->getBoxX(), this->getBoxY());
     }
 }
+
+void Entity::setState(std::string state) { stateMachine.switchTo(state); }
 
 void Entity::initEntityBox()
 {

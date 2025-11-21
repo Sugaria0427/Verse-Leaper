@@ -1,6 +1,5 @@
 #pragma once
 #include "Entity.h"
-#include"GameObjectManager.h"
 
 class DropItem :
     public Entity

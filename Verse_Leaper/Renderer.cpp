@@ -1,17 +1,20 @@
 #include "Renderer.h"
+#include "Panel.h"
 
-void Renderer::draw(SDL_Renderer* SDL_renderer, Drawable* object)
+Renderer& Renderer::Instance()
 {
-    object->draw(SDL_renderer); 
+    static Renderer instance;
+    return instance;
 }
 
-void Renderer::draw(SDL_Renderer* SDL_renderer, std::vector<Drawable*> objVec)
+void Renderer::draw(Drawable* object)
+{
+    object->draw(Panel::Instance().getSDLRenderer()); 
+}
+
+void Renderer::draw(std::vector<Drawable*> objVec)
 {
     for (Drawable* obj : objVec) {
-        obj->draw(SDL_renderer);
+        obj->draw(Panel::Instance().getSDLRenderer());
     }
-}
-
-void Renderer::drawImage()
-{
 }

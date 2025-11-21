@@ -9,7 +9,4 @@ public:
     ~Npc() override = default;
     GameObject* clone() override { return new Npc(*this); }
     void beDeleted() override { delete this; }
-
-private:
-
 };

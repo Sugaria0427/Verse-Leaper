@@ -1,7 +1,18 @@
 #include "Maps.h"
+#include "Npc.h"
+#include "Enemy_sub.h"
 #include "SDL_mixer.h"
 #include "GameObjFactory.h"
 #include "ResourceManager.h"
+#include "Enemy_sub.h"
+#include "Npc.h"
+#include "GameObjectManager.h"
+
+
+bool BossMap::bossDefeated = false;
+bool BossMap::npcSpawned = false;
+Timer BossMap::spawnDelayTimer;
+
 
 /// InitialMap
 InitialMap::InitialMap(int width, int height) : Map(width, height) {
@@ -30,7 +41,7 @@ InitialMap::InitialMap(int width, int height) : Map(width, height) {
     GameObjFactory::instance()->createBlockAreaInMap(Tag::Block_IceGrassUnder, 4 * 150, 7 * 150, 6, 6, this->gameObjVec_);
     GameObjFactory::instance()->createBlockAreaInMap(Tag::Block_IceGrassUnder, 35 * 150, 6 * 150, 7, 7, this->gameObjVec_);
     // 死亡区
-    GameObjFactory::instance()->createBlockAreaInMap(Tag::Block_Dead, 0 * 150, 15 * 150, 2, 42, this->gameObjVec_);
+    GameObjFactory::instance()->createBlockAreaInMap(Tag::Block_Dead, -8 * 150, 15 * 150, 2, 50, this->gameObjVec_);
     CollisionManager::instance()->clearCollisionBoxVec();
 }
 
@@ -188,7 +199,7 @@ TransitionMap::TransitionMap(int width, int height) : Map(width, height) {
     GameObjFactory::instance()->createBlockAreaInMap(Tag::Block_GrassUnder, 36 * 150, 16 * 150, 4, 5, this->gameObjVec_);
     GameObjFactory::instance()->createBlockAreaInMap(Tag::Block_GrassUnder, 43 * 150, 14 * 150, 6, 3, this->gameObjVec_);
     // 云
-    GameObjFactory::instance()->createBlockAreaInMap(Tag::Block_Cloud2, 21 * 150, 12 * 150, 1, 3, this->gameObjVec_);
+    GameObjFactory::instance()->createBlockAreaInMap(Tag::Block_Cloud_Blue, 21 * 150, 12 * 150, 1, 3, this->gameObjVec_);
     // 天空上的：草皮
     GameObjFactory::instance()->createBlockAreaInMap(Tag::Block_Grass, 14 * 150, 11 * 150, 1, 5, this->gameObjVec_);
     GameObjFactory::instance()->createBlockAreaInMap(Tag::Block_Grass, 10 * 150, 7 * 150, 1, 2, this->gameObjVec_);
@@ -324,29 +335,29 @@ CloudMap::CloudMap(int width, int height) : Map(width, height) {
     GameObjFactory::instance()->createBlockAreaInMap(Tag::Block_Grass, 34 * 150, 21 * 150, 2, 3, this->gameObjVec_);
     GameObjFactory::instance()->createBlockAreaInMap(Tag::Block_Grass, 34 * 150, 4 * 150, 2, 3, this->gameObjVec_);
     // 云：第一层
-    GameObjFactory::instance()->createBlockAreaInMap(Tag::Block_Cloud1, 29 * 150, 20 * 150, 1, 3, this->gameObjVec_);
-    GameObjFactory::instance()->createBlockAreaInMap(Tag::Block_Cloud1, 29 * 150, 19 * 150, 1, 1, this->gameObjVec_);
-    GameObjFactory::instance()->createBlockAreaInMap(Tag::Block_Cloud1, 24 * 150, 17 * 150, 1, 2, this->gameObjVec_);
-    GameObjFactory::instance()->createBlockAreaInMap(Tag::Block_Cloud1, 25 * 150, 18 * 150, 1, 2, this->gameObjVec_);
-    GameObjFactory::instance()->createBlockAreaInMap(Tag::Block_Cloud1, 19 * 150, 16 * 150, 1, 3, this->gameObjVec_);
-    GameObjFactory::instance()->createBlockAreaInMap(Tag::Block_Cloud1, 20 * 150, 15 * 150, 1, 1, this->gameObjVec_);
-    GameObjFactory::instance()->createBlockAreaInMap(Tag::Block_Cloud1, 16 * 150, 14 * 150, 1, 2, this->gameObjVec_);
-    GameObjFactory::instance()->createBlockAreaInMap(Tag::Block_Cloud1, 16 * 150, 13 * 150, 1, 1, this->gameObjVec_);
-    GameObjFactory::instance()->createBlockAreaInMap(Tag::Block_Cloud1, 12 * 150, 12 * 150, 1, 2, this->gameObjVec_);
-    GameObjFactory::instance()->createBlockAreaInMap(Tag::Block_Cloud1, 11 * 150, 11 * 150, 1, 1, this->gameObjVec_);
-    GameObjFactory::instance()->createBlockAreaInMap(Tag::Block_Cloud1, 9 * 150, 10 * 150, 1, 1, this->gameObjVec_);
+    GameObjFactory::instance()->createBlockAreaInMap(Tag::Block_Cloud_Red, 29 * 150, 20 * 150, 1, 3, this->gameObjVec_);
+    GameObjFactory::instance()->createBlockAreaInMap(Tag::Block_Cloud_Red, 29 * 150, 19 * 150, 1, 1, this->gameObjVec_);
+    GameObjFactory::instance()->createBlockAreaInMap(Tag::Block_Cloud_Red, 24 * 150, 17 * 150, 1, 2, this->gameObjVec_);
+    GameObjFactory::instance()->createBlockAreaInMap(Tag::Block_Cloud_Red, 25 * 150, 18 * 150, 1, 2, this->gameObjVec_);
+    GameObjFactory::instance()->createBlockAreaInMap(Tag::Block_Cloud_Red, 19 * 150, 16 * 150, 1, 3, this->gameObjVec_);
+    GameObjFactory::instance()->createBlockAreaInMap(Tag::Block_Cloud_Red, 20 * 150, 15 * 150, 1, 1, this->gameObjVec_);
+    GameObjFactory::instance()->createBlockAreaInMap(Tag::Block_Cloud_Red, 16 * 150, 14 * 150, 1, 2, this->gameObjVec_);
+    GameObjFactory::instance()->createBlockAreaInMap(Tag::Block_Cloud_Red, 16 * 150, 13 * 150, 1, 1, this->gameObjVec_);
+    GameObjFactory::instance()->createBlockAreaInMap(Tag::Block_Cloud_Red, 12 * 150, 12 * 150, 1, 2, this->gameObjVec_);
+    GameObjFactory::instance()->createBlockAreaInMap(Tag::Block_Cloud_Red, 11 * 150, 11 * 150, 1, 1, this->gameObjVec_);
+    GameObjFactory::instance()->createBlockAreaInMap(Tag::Block_Cloud_Red, 9 * 150, 10 * 150, 1, 1, this->gameObjVec_);
     // 云：第二层
-    GameObjFactory::instance()->createBlockAreaInMap(Tag::Block_Cloud1, 11 * 150, 5 * 150, 1, 3, this->gameObjVec_);
-    GameObjFactory::instance()->createBlockAreaInMap(Tag::Block_Cloud1, 13 * 150, 6 * 150, 1, 1, this->gameObjVec_);
-    GameObjFactory::instance()->createBlockAreaInMap(Tag::Block_Cloud1, 17 * 150, 6 * 150, 1, 1, this->gameObjVec_);
-    GameObjFactory::instance()->createBlockAreaInMap(Tag::Block_Cloud1, 16 * 150, 7 * 150, 1, 3, this->gameObjVec_);
-    GameObjFactory::instance()->createBlockAreaInMap(Tag::Block_Cloud1, 20 * 150, 5 * 150, 1, 2, this->gameObjVec_);
-    GameObjFactory::instance()->createBlockAreaInMap(Tag::Block_Cloud1, 21 * 150, 4 * 150, 1, 2, this->gameObjVec_);
-    GameObjFactory::instance()->createBlockAreaInMap(Tag::Block_Cloud1, 25 * 150, 5 * 150, 1, 3, this->gameObjVec_);
-    GameObjFactory::instance()->createBlockAreaInMap(Tag::Block_Cloud1, 27 * 150, 4 * 150, 1, 1, this->gameObjVec_);
-    GameObjFactory::instance()->createBlockAreaInMap(Tag::Block_Cloud1, 30 * 150, 5 * 150, 1, 2, this->gameObjVec_);
-    GameObjFactory::instance()->createBlockAreaInMap(Tag::Block_Cloud1, 30 * 150, 6 * 150, 1, 1, this->gameObjVec_);
-    GameObjFactory::instance()->createBlockAreaInMap(Tag::Block_Cloud1, 30 * 150, 7 * 150, 1, 1, this->gameObjVec_);
+    GameObjFactory::instance()->createBlockAreaInMap(Tag::Block_Cloud_Red, 11 * 150, 5 * 150, 1, 3, this->gameObjVec_);
+    GameObjFactory::instance()->createBlockAreaInMap(Tag::Block_Cloud_Red, 13 * 150, 6 * 150, 1, 1, this->gameObjVec_);
+    GameObjFactory::instance()->createBlockAreaInMap(Tag::Block_Cloud_Red, 17 * 150, 6 * 150, 1, 1, this->gameObjVec_);
+    GameObjFactory::instance()->createBlockAreaInMap(Tag::Block_Cloud_Red, 16 * 150, 7 * 150, 1, 3, this->gameObjVec_);
+    GameObjFactory::instance()->createBlockAreaInMap(Tag::Block_Cloud_Red, 20 * 150, 5 * 150, 1, 2, this->gameObjVec_);
+    GameObjFactory::instance()->createBlockAreaInMap(Tag::Block_Cloud_Red, 21 * 150, 4 * 150, 1, 2, this->gameObjVec_);
+    GameObjFactory::instance()->createBlockAreaInMap(Tag::Block_Cloud_Red, 25 * 150, 5 * 150, 1, 3, this->gameObjVec_);
+    GameObjFactory::instance()->createBlockAreaInMap(Tag::Block_Cloud_Red, 27 * 150, 4 * 150, 1, 1, this->gameObjVec_);
+    GameObjFactory::instance()->createBlockAreaInMap(Tag::Block_Cloud_Red, 30 * 150, 5 * 150, 1, 2, this->gameObjVec_);
+    GameObjFactory::instance()->createBlockAreaInMap(Tag::Block_Cloud_Red, 30 * 150, 6 * 150, 1, 1, this->gameObjVec_);
+    GameObjFactory::instance()->createBlockAreaInMap(Tag::Block_Cloud_Red, 30 * 150, 7 * 150, 1, 1, this->gameObjVec_);
     // 跳跃板
     GameObjFactory::instance()->createBlockAreaInMap(Tag::Block_JumpPad, 8 * 150, 9 * 150, 1, 1, this->gameObjVec_);
     // 死亡区
@@ -414,16 +425,16 @@ BossMap::BossMap(int width, int height) : Map(width, height)
     // 土壤
     GameObjFactory::instance()->createBlockAreaInMap(Tag::Block_GrassUnder, 0 * 150, 20 * 150, 1, 28, this->gameObjVec_);
     // 云
-    GameObjFactory::instance()->createBlockAreaInMap(Tag::Block_Cloud1, 12 * 150, 15 * 150, 1, 5, this->gameObjVec_);
-    GameObjFactory::instance()->createBlockAreaInMap(Tag::Block_Cloud1, 15 * 150, 11 * 150, 1, 1, this->gameObjVec_);
-    GameObjFactory::instance()->createBlockAreaInMap(Tag::Block_Cloud1, 17 * 150, 12 * 150, 1, 1, this->gameObjVec_);
-    GameObjFactory::instance()->createBlockAreaInMap(Tag::Block_Cloud1, 19 * 150, 13 * 150, 1, 1, this->gameObjVec_);
-    GameObjFactory::instance()->createBlockAreaInMap(Tag::Block_Cloud1, 15 * 150, 5 * 150, 1, 2, this->gameObjVec_);
-    GameObjFactory::instance()->createBlockAreaInMap(Tag::Block_Cloud1, 19 * 150, 5 * 150, 1, 3, this->gameObjVec_);
-    GameObjFactory::instance()->createBlockAreaInMap(Tag::Block_Cloud1, 21 * 150, 6 * 150, 1, 1, this->gameObjVec_);
-    GameObjFactory::instance()->createBlockAreaInMap(Tag::Block_Cloud1, 24 * 150, 5 * 150, 1, 4, this->gameObjVec_);
-    GameObjFactory::instance()->createBlockAreaInMap(Tag::Block_Cloud1, 26 * 150, 6 * 150, 1, 2, this->gameObjVec_);
-    GameObjFactory::instance()->createBlockAreaInMap(Tag::Block_Cloud1, 27 * 150, 7 * 150, 1, 1, this->gameObjVec_);
+    GameObjFactory::instance()->createBlockAreaInMap(Tag::Block_Cloud_Red, 12 * 150, 15 * 150, 1, 5, this->gameObjVec_);
+    GameObjFactory::instance()->createBlockAreaInMap(Tag::Block_Cloud_Red, 15 * 150, 11 * 150, 1, 1, this->gameObjVec_);
+    GameObjFactory::instance()->createBlockAreaInMap(Tag::Block_Cloud_Red, 17 * 150, 12 * 150, 1, 1, this->gameObjVec_);
+    GameObjFactory::instance()->createBlockAreaInMap(Tag::Block_Cloud_Red, 19 * 150, 13 * 150, 1, 1, this->gameObjVec_);
+    GameObjFactory::instance()->createBlockAreaInMap(Tag::Block_Cloud_Red, 15 * 150, 5 * 150, 1, 2, this->gameObjVec_);
+    GameObjFactory::instance()->createBlockAreaInMap(Tag::Block_Cloud_Red, 19 * 150, 5 * 150, 1, 3, this->gameObjVec_);
+    GameObjFactory::instance()->createBlockAreaInMap(Tag::Block_Cloud_Red, 21 * 150, 6 * 150, 1, 1, this->gameObjVec_);
+    GameObjFactory::instance()->createBlockAreaInMap(Tag::Block_Cloud_Red, 24 * 150, 5 * 150, 1, 4, this->gameObjVec_);
+    GameObjFactory::instance()->createBlockAreaInMap(Tag::Block_Cloud_Red, 26 * 150, 6 * 150, 1, 2, this->gameObjVec_);
+    GameObjFactory::instance()->createBlockAreaInMap(Tag::Block_Cloud_Red, 27 * 150, 7 * 150, 1, 1, this->gameObjVec_);
     // 跳跃板
     GameObjFactory::instance()->createBlockAreaInMap(Tag::Block_JumpPad, 8 * 150, 19 * 150, 1, 2, this->gameObjVec_);
     GameObjFactory::instance()->createBlockAreaInMap(Tag::Block_JumpPad, 18 * 150, 19 * 150, 1, 2, this->gameObjVec_);
@@ -432,9 +443,28 @@ BossMap::BossMap(int width, int height) : Map(width, height)
     // 死亡区
     GameObjFactory::instance()->createBlockAreaInMap(Tag::Block_Dead, 0 * 150, 25 * 150, 2, 36, this->gameObjVec_);
     CollisionManager::instance()->clearCollisionBoxVec();
+
+    // 静态成员已经在文件顶部定义，这里无需再次定义，但可以用于重置状态
+    BossMap::bossDefeated = false;
+    BossMap::npcSpawned = false;
+
+    // 配置Timer
+    BossMap::spawnDelayTimer.setWaitTime(2000);    // 2秒延迟
+    BossMap::spawnDelayTimer.setOneShot(true);     // 单次触发
+
+    // 设置回调函数：时间到了自动生成NPC
+    BossMap::spawnDelayTimer.setCallback([this]() {
+        this->spawnFinalNpc();
+        });
+
 }
 
 void BossMap::onEnter() {
+    // 重置状态
+    BossMap::bossDefeated = false;
+    BossMap::npcSpawned = false;
+    BossMap::spawnDelayTimer.restart();
+
     // 切换游戏对象管理器中的对象列表为当前地图的对象列表
     MapManager::instance()->setCurrentMap("BossMap");
     GameObjManager::instance()->switchObjVec();
@@ -461,11 +491,67 @@ void BossMap::onUpdate(int delta) {
         MapManager::instance()->switchMap("CloudMap");
         break;
     }
+
+    // 移除原有的Boss存在性检查逻辑。
+    // 现在完全依赖 BossDeadState 调用 notifyBossDefeat() 来设置 bossDefeated = true。
+
+    // Boss被击败后，更新计时器（由 BossDeadState -> notifyBossDefeat 触发）
+    if (BossMap::bossDefeated && !BossMap::npcSpawned) {
+        BossMap::spawnDelayTimer.update(delta);
+    }
 }
 
 void BossMap::onExit() {
-    Mix_HaltChannel(-1); // 停止所有音效播放
-	Mix_HaltMusic(); // 停止BGM播放
+    // 清理时重置状态
+    BossMap::bossDefeated = false;
+    BossMap::npcSpawned = false;
+
+    BossMap::spawnDelayTimer.restart();
 }
 
+// NPC生成函数
+void BossMap::spawnFinalNpc() {
+    if (BossMap::npcSpawned) return;  // 防止重复生成
 
+    // 设置NPC生成位置（根据你的地图布局调整这些坐标）
+    int npcX = 3000;  // X坐标：Boss战斗区域中心偏右
+    int npcY = 500;   // Y坐标：地面高度
+
+    Npc* finalNpc = GameObjFactory::instance()->createNpc(
+        Tag::Npc_SuShi_Young,
+        npcX,
+        npcY
+    );
+
+    if (finalNpc) {
+        GameObjManager::instance()->addGameObj(finalNpc);
+        BossMap::npcSpawned = true;
+
+        std::cout << "====================================" << std::endl;
+        std::cout << "Young SuShi has appeared!" << std::endl;
+        std::cout << "Position: (" << npcX << ", " << npcY << ")" << std::endl;
+        std::cout << "====================================" << std::endl;
+
+        // 可选：播放NPC出现音效
+        // Mix_PlayChannel(-1, ResourceManager::Instance().getSound(SoundType::npcAppear), 0);
+
+        // 可选：播放特殊对话BGM
+        // Mix_FadeInMusic(ResourceManager::Instance().getMusic(MusicType::endingBgm), -1, 1000);
+    }
+    else {
+        std::cerr << "ERROR: Failed to create final NPC!" << std::endl;
+    }
+}
+
+// 供 BossDeadState 调用的接口
+void BossMap::notifyBossDefeat() {
+    // 仅在 Boss 首次被击败时执行
+    if (!BossMap::bossDefeated) {
+        BossMap::bossDefeated = true;
+        // 假设 NPC 召唤需要 1 秒延迟
+        BossMap::spawnDelayTimer.setWaitTime(1000);
+        BossMap::spawnDelayTimer.restart();
+
+        std::cout << "Boss defeated flag set. NPC spawn timer started." << std::endl;
+    }
+}

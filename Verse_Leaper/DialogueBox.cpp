@@ -1,11 +1,7 @@
 #include "DialogueBox.h"
 #include "GameObjFactory.h"
 #include "ResourceManager.h"
-
-extern std::vector<Mix_Chunk*> dialogueVec_giveArrow;
-extern std::vector<Mix_Chunk*> dialogueVec_alcohol;
-extern std::vector<Mix_Chunk*> dialogueVec_OldMan;
-extern std::vector<Mix_Chunk*> dialogueVec_Young;
+#include "GameObjectManager.h"
 
 DialogueBox::DialogueBox(int x, int y, int width, int height) : Box(x, y, width, height)
 {
@@ -15,7 +11,7 @@ DialogueBox::DialogueBox(int x, int y, int width, int height) : Box(x, y, width,
 
 DialogueBox::~DialogueBox()
 {
-    delete dialogueAnimation;   
+    delete dialogueAnimation;
 }
 
 void DialogueBox::draw(SDL_Renderer* SDL_renderer) {
@@ -31,40 +27,46 @@ void DialogueBox::draw(SDL_Renderer* SDL_renderer) {
     }
 }
 
+bool DialogueBox::isExist() const { return isExist_; }
+
+void DialogueBox::setExist(bool isExist) { isExist_ = isExist; }
+
+void DialogueBox::setAtlas(Atlas* atlas) { dialogueAnimation->setAtlas(atlas); }
+
+void DialogueBox::setDialogueVec(const std::vector<Mix_Chunk*>& dialogueVec_) { dialogueVec = dialogueVec_; }
+
 void DialogueBox::next() {
-    if (this->isExist()) {
-        if (dialogueAnimation->isLastFrame()) {
-            // 动画结束后关闭对话框
-            this->setExist(false);
-            this->dialogueAnimation->reset();
-            // 停止当前音频
-            Mix_HaltChannel(-1);
-            // 掉落弓箭
-            // 控制雾气消失
-            for (GameObject* obj : GameObjManager::instance()->getVec()) {
-                switch (dialogue) {
-                case Dialogue::Npc_SuShi_Old_giveArrow:
-                    if (obj->getTag() == Tag::Block_Mist_SuShi_Arrow) obj->setExist(false);
-                    if (!GameObjManager::instance()->getPlayer()->hasArrow() && obj->getTag() == Tag::Npc_SuShi_Old_giveArrow) {
-                        DropItem* dropItem = GameObjFactory::instance()->createDropItem(Tag::DropItem_Arrow, obj->getBoxX(), obj->getBoxY());
-                        dropItem->drop(obj->getBoxX(), obj->getBoxY());
-                        GameObjManager::instance()->addGameObj(dropItem);
-                    }
-                    break;
-                case Dialogue::Npc_SuShi_Old_alcohol:
-                    if (obj->getTag() == Tag::Block_Mist02) obj->setExist(false);
-                    break;
+    if (!this->isExist()) return;   // 对话框不存在时不处理
+    
+    if (dialogueAnimation->isLastFrame()) {
+        // 动画结束后关闭对话框
+        this->setExist(false);
+        this->dialogueAnimation->reset();
+        // 停止当前音频
+        Mix_HaltChannel(-1);
+        // 控制雾气消失
+        for (GameObject* obj : GameObjManager::instance()->getVec()) {
+            switch (dialogue) {
+            case Dialogue::Npc_SuShi_Old_giveArrow:
+                if (obj->getTag() == Tag::Block_Mist_SuShi_Arrow) obj->setExist(false);
+                if (!GameObjManager::instance()->getPlayer()->hasArrow() && obj->getTag() == Tag::Npc_SuShi_Old_giveArrow) {
+                    DropItem* dropItem = GameObjFactory::instance()->createDropItem(Tag::DropItem_Arrow, obj->getBoxX(), obj->getBoxY());
+                    dropItem->drop(obj->getBoxX(), obj->getBoxY());
+                    GameObjManager::instance()->addGameObj(dropItem);
                 }
+                break;
+            case Dialogue::Npc_SuShi_Old_alcohol:
+                if (obj->getTag() == Tag::Block_Mist02) obj->setExist(false);
+                break;
             }
         }
-        else {
-			// 暂停当前音频
-			Mix_HaltChannel(-1);
-			// 播放当前帧对应音频            
-            this->dialogueAnimation->nextIdxFrame();
-            this->playDialogue(this->dialogueAnimation->getIndexFrame());
-
-        }
+    }
+    else {
+		// 暂停当前音频
+		Mix_HaltChannel(-1);
+		// 播放当前帧对应音频            
+        this->dialogueAnimation->nextIdxFrame();
+        this->playDialogue(this->dialogueAnimation->getIndexFrame());
     }
 }
 
@@ -83,23 +85,23 @@ void DialogueBox::start(Dialogue dialogue)
     case Dialogue::Npc_SuShi_Old_giveArrow:
         this->dialogue = Dialogue::Npc_SuShi_Old_giveArrow;
         // 播放音效
-        this->setDialogueVec(dialogueVec_giveArrow);
+        this->setDialogueVec(ResourceManager::Instance().getDialogue(DialogueType::GiveArrow));
         // 展示对话
         this->setAtlas(ResourceManager::Instance().getAtlas(AtlasType::atlasDialogue_giveArrow));
         break;
     case Dialogue::Npc_SuShi_Old_alcohol:
         this->dialogue = Dialogue::Npc_SuShi_Old_alcohol;
-        this->setDialogueVec(dialogueVec_alcohol);
+        this->setDialogueVec(ResourceManager::Instance().getDialogue(DialogueType::Alcohol));
         this->setAtlas(ResourceManager::Instance().getAtlas(AtlasType::atlasDialogue_alcohol));
         break;
     case Dialogue::Npc_OldMan:
         this->dialogue = Dialogue::Npc_OldMan;
-        this->setDialogueVec(dialogueVec_OldMan);
+        this->setDialogueVec(ResourceManager::Instance().getDialogue(DialogueType::OldMan));
         this->setAtlas(ResourceManager::Instance().getAtlas(AtlasType::atlasDialogue_OldMan));
         break;
     case Dialogue::Npc_SuShi_Young:
         this->dialogue = Dialogue::Npc_SuShi_Old_alcohol;
-        this->setDialogueVec(dialogueVec_Young);
+        this->setDialogueVec(ResourceManager::Instance().getDialogue(DialogueType::Young));
         this->setAtlas(ResourceManager::Instance().getAtlas(AtlasType::atlasDialogue_Young));
         break;
     }

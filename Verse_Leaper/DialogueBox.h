@@ -1,9 +1,12 @@
 #pragma once
+#include <SDL_mixer.h>
+#include <vector>
 #include "Box.h"
-#include "Animation.h"
 #include "Drawable.h"
-#include "GameObjectManager.h"
-#include<SDL_mixer.h>
+
+class Animation;
+
+class Atlas;
 
 class DialogueBox :
     public Box, public Drawable
@@ -17,18 +20,21 @@ public:
         Npc_SuShi_Young,
         null
     };
+
+public:
     DialogueBox(int x, int y, int width, int height);
     ~DialogueBox();
-    // 接口
+    
     void draw(SDL_Renderer* SDL_renderer) override;
-    // getters&setters
-    bool isExist() const { return isExist_; }
-    void setExist(bool isExist) { isExist_ = isExist; }
-    void setAtlas(Atlas* atlas) { dialogueAnimation->setAtlas(atlas); }
-	void setDialogueVec(const std::vector<Mix_Chunk*>& dialogueVec_) { dialogueVec = dialogueVec_; }
 
-    void next();    // 跳转下一条对话
-	void playDialogue(int idx); // 播放第idx条对话
+public:
+    bool isExist() const;
+    void setExist(bool isExist);
+    void setAtlas(Atlas* atlas);
+	void setDialogueVec(const std::vector<Mix_Chunk*>& dialogueVec_);
+
+    void next();                    // 跳转下一条对话
+	void playDialogue(int idx);     // 播放第idx条对话
     void start(Dialogue dialogue);
 
 private:

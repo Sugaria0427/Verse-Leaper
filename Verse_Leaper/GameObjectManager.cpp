@@ -1,6 +1,8 @@
 #include "GameObjectManager.h"
-#include "Player.h"
 #include "ResourceManager.h"
+#include "MapManager.h"
+#include "GameObject.h"
+#include "Player.h"
 
 GameObjManager* GameObjManager::gameObjManager = nullptr;
 

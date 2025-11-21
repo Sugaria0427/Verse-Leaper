@@ -1,39 +1,52 @@
 #pragma once
 #include <vector>
-#include "SceneManager.h"
-#include "GameObjectManager.h"
-#include "Player.h"
-#include "Npc.h"
-#include "Block.h"
-#include "Enemy.h"
-#include "DropItem.h"
-#include "CollisionManager.h"
-#include "MapManager.h"
-#include "DialogueBox.h"
-#include "GameObjFactory.h"
+#include "Scene.h"
+
+class DialogueBox;
+
+class GameObject;
 
 class GameScene :
     public Scene
 {
+private:
+    DialogueBox* dialogueBox = nullptr;
+    bool isCameraFollowing_ = true;
+
 public:
     GameScene(Image* backgroundImage, std::vector<Button*>& btnVec)
         : Scene(backgroundImage, btnVec) {}
     ~GameScene() = default;
-    // 接口
+    
+public:
     void draw(SDL_Renderer* SDL_renderer) override;
     void update(int delta) override;
-    // 处理状态与事件
     void handleEvent(SDL_Event& event) override;
     void handleState(MouseInput& msInput) override;
-    // 进入与退出
     void onEnter() override;
     void onExit() override;
+
 private:
-    DialogueBox* dialogueBox = nullptr;
-    bool isCameraFollowing_ = true;
-    bool isRunning = false;
-    bool isFalling = false;
-    int doubleJumpCount = 0;
+    // 绘制子函数
     void drawGameObj(SDL_Renderer* SDL_renderer);
     void drawBackground(SDL_Renderer* SDL_renderer) override;
+
+private:
+    // 更新子函数
+    void updateCameraPosition(int delta) const;
+
+private:
+    // 事件处理子函数
+    void handleMouseButtonUpEvent(SDL_Event& event);
+    void tryTriggerMouseInteractiveObjs(SDL_Event& event);
+    void triggerBell(GameObject* obj);
+    void tryUseArrow();
+    void tryUseSword();
+    void handleMouseWheelEvent(SDL_Event& event);
+    void handleKeyDownEvent(SDL_Event& event);
+
+private:
+    // 状态处理子函数
+    void handlePlayerMovementState(const Uint8* kbState);
+    void handleCameraMovementState(const Uint8* kbState);
 };

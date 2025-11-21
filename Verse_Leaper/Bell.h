@@ -1,5 +1,6 @@
 #pragma once
 #include "Entity.h"
+
 class Bell:
 	public Entity
 {

@@ -69,8 +69,8 @@ enum class AtlasType
     atlasBlock_IceGrass,
     atlasBlock_IceGrassUnder,
     atlasBlock_Ice,
-    atlasBlock_Cloud1,
-    atlasBlock_Cloud2,
+    atlasBlock_Cloud_Red,
+    atlasBlock_Cloud_Blue,
     atlasBlock_JumpPad,
     atlasBlock_SavePoint,
     atlasBlock_Teleport,
@@ -84,15 +84,12 @@ enum class AtlasType
     atlasArrowLeft,
     atlasBell,
     atlasDrum,
-    atlasEnemyDog,
     atlasEnemyDogRunRight,
     atlasEnemyDogRunLeft,
     atlasEnemyDogDead,
-    atlasEnemyEagle,
     atlasEnemyEagleFlyRight,
     atlasEnemyEagleFlyLeft,
     atlasEnemyEagleDead,
-    atlasEnemyDead,
     atlasEnemyTigerIdleRight,
     atlasEnemyTigerIdleLeft,
     atlasEnemyTigerMoveRight,
@@ -123,6 +120,14 @@ enum class AtlasType
     atlasDialogue_Young,
 };
 
+enum class DialogueType
+{
+    GiveArrow,
+    Alcohol,
+    OldMan,
+    Young,
+};
+
 class ResourceManager
 {
 private:
@@ -138,15 +143,21 @@ public:
     Mix_Music* getMusic(MusicType type);
     Mix_Chunk*& getSound(SoundType type);
     Atlas* getAtlas(AtlasType type);
+    std::vector<Mix_Chunk*>& getDialogue(DialogueType type);
+
     void loadMusic(MusicType type, const char* path);
     void loadSound(SoundType type, const char* path);
     void loadAtlas(AtlasType type, const char* path, int size, SDL_RendererFlip initFlip = SDL_FLIP_NONE);
+    void loadDialogue(DialogueType type, const std::vector<const char*>& paths);
+    
     void initMusic();
     void initSound();
     void initAtlas();
+    void initDialogue();
 
 private:
     std::unordered_map<MusicType, Mix_Music*> musicPool;
     std::unordered_map<SoundType, Mix_Chunk*> soundPool;
     std::unordered_map<AtlasType, Atlas*> atlasPool;
+    std::unordered_map<DialogueType, std::vector<Mix_Chunk*>> dialoguePool;
 };

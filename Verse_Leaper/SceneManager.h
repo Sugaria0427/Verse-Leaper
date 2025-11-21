@@ -1,40 +1,43 @@
 #pragma once
 #include"Scene.h"
+#include "Updatable.h"
+#include <unordered_map>
 
-class SceneManager
+enum class SceneType
 {
-public:
-    enum class SceneType
-    {
-        Menu,
-        Game,
-        Option
-    };
+    Menu,
+    Game,
+    Option
+};
+
+class SceneManager : public Updatable
+{
 private:
-    SceneManager() {}
-    ~SceneManager() {
-        currentScene = nullptr;
-    }
+    SceneManager();
+    ~SceneManager();
+
 public:
-    static SceneManager* Instance() {
-        static SceneManager* instance = new SceneManager();
-        return instance;
-    }
-    void initCurrentScene(Scene* scene) { 
-        currentScene = scene; 
-        currentScene->onEnter();
-    }
+    static SceneManager* Instance();
+
+    void update(int delta) override;
+
+    void setAndEnterCurrentScene(SceneType scene);
+
+    void switchTo(SceneType sceneType);
+
+    void handleEvent();
+
+    void handleState(MouseInput &msInput);
+
 public:
-    // getters & setters
     Scene* getCurrentScene() { return currentScene; }
     void setCurrentScene(Scene* scene);
 
-    void switchTo(SceneType sceneType);
-    void handleEvent(SDL_Event &event);
-    void handleState(MouseInput &msInput);
-    void update(int delta);
+    Scene* getScene(SceneType sceneType);
+    void addScene(SceneType sceneType, Scene* scene);
+
 private:
     static SceneManager* instance;
-    Scene* currentScene;
+    Scene* currentScene = nullptr;
+    std::unordered_map<SceneType, Scene*> scenesPool;
 };
-

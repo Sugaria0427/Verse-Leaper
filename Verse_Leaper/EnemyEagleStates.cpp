@@ -2,6 +2,7 @@
 #include "GameObjFactory.h"
 #include "Enemy_sub.h"
 #include "ResourceManager.h"
+#include "GameObjectManager.h"
 
 EnemyEaglePatrolState::EnemyEaglePatrolState(GameObject* owner) : StateNode(owner)
 {
@@ -22,7 +23,7 @@ EnemyEaglePatrolState::EnemyEaglePatrolState(GameObject* owner) : StateNode(owne
     );
 }
 void EnemyEaglePatrolState::onEnter() {
-    EnemyEagle* eagle = dynamic_cast<EnemyEagle*>(this->getOwner());
+    Eagle* eagle = dynamic_cast<Eagle*>(this->getOwner());
 	Player* player = dynamic_cast<Player*>(GameObjManager::instance()->getPlayer());
     this->patrolTimer_.restart();
     this->isMoveRight_ = false;
@@ -33,7 +34,7 @@ void EnemyEaglePatrolState::onEnter() {
         this->getOwner()->setAtlas(ResourceManager::Instance().getAtlas(AtlasType::atlasEnemyEagleFlyLeft));
 }
 void EnemyEaglePatrolState::update(int delta) {
-    EnemyEagle* eagle = dynamic_cast<EnemyEagle*>(this->getOwner());
+    Eagle* eagle = dynamic_cast<Eagle*>(this->getOwner());
     Player* player = dynamic_cast<Player*>(GameObjManager::instance()->getPlayer());
     if (player && eagle->getPatrolRange().isPointOn(player->getBoxCenterX(), player->getBoxCenterY()) && !isPlayedFly) {
         eagleFlyChannel = Mix_PlayChannel(-1, ResourceManager::Instance().getSound(SoundType::eagleFly), -1);
@@ -75,7 +76,7 @@ void EnemyEagleHurtState::onEnter() {
 }
 void EnemyEagleHurtState::update(int delta) {
     this->hurtTimer->update(delta);
-    EnemyEagle* eagle = dynamic_cast<EnemyEagle*>(this->getOwner());
+    Eagle* eagle = dynamic_cast<Eagle*>(this->getOwner());
     if (this->getOwner()->IsDead()) {
         eagle->setState("Dead");
         return;
@@ -91,13 +92,13 @@ void EnemyEagleHurtState::onExit() {
 
 EnemyEagleDeadState::EnemyEagleDeadState(GameObject* owner) : StateNode(owner) {}
 void EnemyEagleDeadState::onEnter() {
-    EnemyEagle* eagle = dynamic_cast<EnemyEagle*>(this->getOwner());
+    Eagle* eagle = dynamic_cast<Eagle*>(this->getOwner());
     dieChannel = Mix_PlayChannel(-1, ResourceManager::Instance().getSound(SoundType::die), 0);
     eagle->setSpeed(0, 0);
     eagle->setAtlas(ResourceManager::Instance().getAtlas(AtlasType::atlasEnemyEagleDead));
 }
 void EnemyEagleDeadState::update(int delta) {
-    EnemyEagle* enemy = dynamic_cast<EnemyEagle*>(this->getOwner());
+    Eagle* enemy = dynamic_cast<Eagle*>(this->getOwner());
     DropItem* dropItem = nullptr;
     if (enemy->willDrop()) {
         // ²úÉúµôÂäÎï

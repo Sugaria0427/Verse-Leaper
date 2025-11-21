@@ -1,5 +1,6 @@
 #pragma once
 #include"Map.h"
+#include"Timer.h"
 
 class InitialMap : public Map 
 {

@@ -1,5 +1,5 @@
-#include "ResourceManager.h"
 #include <stdexcept>
+#include "ResourceManager.h"
 
 Mix_Music* ResourceManager::getMusic(MusicType type) {
     if (musicPool.find(type) != musicPool.end()) {
@@ -29,6 +29,16 @@ Atlas* ResourceManager::getAtlas(AtlasType type) {
     }
 }
 
+std::vector<Mix_Chunk*>& ResourceManager::getDialogue(DialogueType type)
+{
+    if (dialoguePool.find(type) != dialoguePool.end()) {
+        return dialoguePool[type];
+    }
+    else {
+        throw std::runtime_error("Dialogue not found");
+    }
+}
+
 void ResourceManager::loadMusic(MusicType type, const char* path) {
     musicPool[type] = Mix_LoadMUS(path);
 }
@@ -41,6 +51,16 @@ void ResourceManager::loadSound(SoundType type, const char* path)
 void ResourceManager::loadAtlas(AtlasType type, const char* path, int size, SDL_RendererFlip initFlip)
 {
     atlasPool[type] = new Atlas(path, size, initFlip);
+}
+
+void ResourceManager::loadDialogue(DialogueType type, const std::vector<const char*>& paths)
+{
+    std::vector<Mix_Chunk*> dialogueSounds;
+    for (const char* path : paths) {
+        Mix_Chunk* chunk = Mix_LoadWAV(path);
+        dialogueSounds.push_back(chunk);
+    }
+    dialoguePool[type] = dialogueSounds;
 }
 
 void ResourceManager::initMusic()
@@ -112,8 +132,8 @@ void ResourceManager::initAtlas()
     ResourceManager::Instance().loadAtlas(AtlasType::atlasBlock_IceGrass, "atlas\\block_Ice_%d.bmp", 1);
     ResourceManager::Instance().loadAtlas(AtlasType::atlasBlock_IceGrassUnder, "atlas\\Block_IceUnder_%d.bmp", 1);
     ResourceManager::Instance().loadAtlas(AtlasType::atlasBlock_Ice, "atlas\\block_Ice_%d.bmp", 1);
-    ResourceManager::Instance().loadAtlas(AtlasType::atlasBlock_Cloud1, "atlas\\block_Cloud1_%d.bmp", 1);
-    ResourceManager::Instance().loadAtlas(AtlasType::atlasBlock_Cloud2, "atlas\\block_Cloud2_%d.bmp", 1);
+    ResourceManager::Instance().loadAtlas(AtlasType::atlasBlock_Cloud_Red, "atlas\\block_Cloud_Red_%d.bmp", 1);
+    ResourceManager::Instance().loadAtlas(AtlasType::atlasBlock_Cloud_Blue, "atlas\\block_Cloud_Blue_%d.bmp", 1);
     ResourceManager::Instance().loadAtlas(AtlasType::atlasBlock_JumpPad, "atlas\\block_JumpPad_%d.bmp", 1);
     ResourceManager::Instance().loadAtlas(AtlasType::atlasBlock_SavePoint, "atlas\\block_SavePoint_%d.bmp", 1);
     ResourceManager::Instance().loadAtlas(AtlasType::atlasBlock_Teleport, "atlas\\block_Teleport_%d.bmp", 1);
@@ -129,16 +149,13 @@ void ResourceManager::initAtlas()
     ResourceManager::Instance().loadAtlas(AtlasType::atlasBell, "atlas\\bell_%d.bmp", 1);
     ResourceManager::Instance().loadAtlas(AtlasType::atlasDrum, "atlas\\drum_%d.bmp", 1);
 
-    ResourceManager::Instance().loadAtlas(AtlasType::atlasEnemyDog, "atlas\\enemy01_%d.bmp", 3);
     ResourceManager::Instance().loadAtlas(AtlasType::atlasEnemyDogRunRight, "atlas\\dog\\dogPatrol_%d.bmp", 7, SDL_FLIP_HORIZONTAL);
     ResourceManager::Instance().loadAtlas(AtlasType::atlasEnemyDogRunLeft, "atlas\\dog\\dogPatrol_%d.bmp", 7);
     ResourceManager::Instance().loadAtlas(AtlasType::atlasEnemyDogDead, "atlas\\dog\\dogDead_%d.bmp", 5);
 
-    ResourceManager::Instance().loadAtlas(AtlasType::atlasEnemyEagle, "atlas\\enemy02_%d.bmp", 3);
     ResourceManager::Instance().loadAtlas(AtlasType::atlasEnemyEagleFlyRight, "atlas\\eagle\\eaglePatrol_%d.bmp", 6, SDL_FLIP_HORIZONTAL);
     ResourceManager::Instance().loadAtlas(AtlasType::atlasEnemyEagleFlyLeft, "atlas\\eagle\\eaglePatrol_%d.bmp", 6);
     ResourceManager::Instance().loadAtlas(AtlasType::atlasEnemyEagleDead, "atlas\\eagle\\eagleDead_%d.bmp", 5);
-    ResourceManager::Instance().loadAtlas(AtlasType::atlasEnemyDead, "atlas\\enemyDead_%d.bmp", 3);
 
     ResourceManager::Instance().loadAtlas(AtlasType::atlasEnemyTigerIdleRight, "atlas\\Tiger\\tiger_Idle_%d.bmp", 1, SDL_FLIP_HORIZONTAL);
     ResourceManager::Instance().loadAtlas(AtlasType::atlasEnemyTigerIdleLeft, "atlas\\Tiger\\tiger_Idle_%d.bmp", 1);
@@ -158,6 +175,7 @@ void ResourceManager::initAtlas()
     ResourceManager::Instance().loadAtlas(AtlasType::atlasEnemyBossLaser, "atlas\\Boss\\boss_laser_%d.bmp", 4);
     ResourceManager::Instance().loadAtlas(AtlasType::atlasEnemyBossBarrage, "atlas\\Boss\\boss_laser_%d.bmp", 4);
     ResourceManager::Instance().loadAtlas(AtlasType::atlasEnemyBossWeak, "atlas\\Boss\\boss_weak_%d.bmp", 3);
+    ResourceManager::Instance().loadAtlas(AtlasType::atlasEnemyBossDead, "atlas\\Boss\\boss_weak_%d.bmp", 3);
     ResourceManager::Instance().loadAtlas(AtlasType::atlasLaser, "atlas\\Boss\\laser_%d.bmp", 1);
     ResourceManager::Instance().loadAtlas(AtlasType::atlasBarrage, "atlas\\Boss\\barrage_%d.bmp", 1);
 
@@ -172,4 +190,39 @@ void ResourceManager::initAtlas()
     ResourceManager::Instance().loadAtlas(AtlasType::atlasDialogue_OldMan, "atlas\\dialogue\\OldMan\\Dialogue01_%d.bmp", 6);
     ResourceManager::Instance().loadAtlas(AtlasType::atlasDialogue_Young, "atlas\\dialogue\\SuShi_Young\\Dialogue04_%d.bmp", 7);
 
+}
+
+void ResourceManager::initDialogue()
+{
+    ResourceManager::Instance().loadDialogue(DialogueType::GiveArrow, { 
+        "dialogue\\giveArrow\\FirstSuShi01.wav",
+        "empty",
+        "dialogue\\giveArrow\\FirstSuShi02.wav",
+        "empty",
+        "dialogue\\giveArrow\\FirstSuShi03.wav" }
+    );
+    ResourceManager::Instance().loadDialogue(DialogueType::Alcohol, {
+        "empty",
+        "dialogue\\alcohol\\SecondSuShi01.wav",
+        "empty",
+        "dialogue\\alcohol\\SecondSuShi02.wav",
+        "empty" }
+    );
+    ResourceManager::Instance().loadDialogue(DialogueType::OldMan, {
+        "dialogue\\oldMan\\Oldman01.wav",
+        "empty",
+        "empty",
+        "dialogue\\oldMan\\Oldman02.wav",
+        "empty",
+        "dialogue\\oldMan\\Oldman03.wav" }
+    );
+    ResourceManager::Instance().loadDialogue(DialogueType::Young, {
+        "dialogue\\young\\Taishou01.wav",
+        "empty",
+        "dialogue\\young\\Taishou02.wav",
+        "empty",
+        "dialogue\\young\\Taishou03.wav",
+        "empty",
+        "dialogue\\young\\Taishou04.wav", }
+    );
 }

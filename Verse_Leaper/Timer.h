@@ -1,6 +1,6 @@
 #pragma once
 #include <functional>
-#include"Updatable.h"
+#include "Updatable.h"
 
 class Timer : public Updatable
 {
@@ -9,29 +9,17 @@ public:
     Timer(const Timer& timer) = default;
     ~Timer() = default;
 
-    void setWaitTime(int val){waitTime = val;}
-    int getPassTime() const { return passTime; }
-    void setCallback(std::function<void()> callback){this->callback = callback;}
-	int getWaitTime() const { return waitTime; }
+    void setWaitTime(int val);
+    int getPassTime() const;
+    void setCallback(std::function<void()> callback);
+	int getWaitTime() const;
 
-    void restart() {
-        passTime = 0;
-        isShotted_ = false;
-    }
-    void pause(){paused = true;}
-    void resume(){ paused = false; }
-    void setOneShot(bool isOneShot) { isOneShot_ = isOneShot; }
-    bool isShotted() const { return isShotted_; }
-    void update(int delta) override{
-        if (paused)
-            return;
-        passTime += delta;
-        if (passTime >= waitTime && (!isShotted_ || !isOneShot_)) {
-            if (callback) callback();
-            isShotted_ = true;
-            passTime = 0;
-        }
-    }
+    void restart();
+    void pause();
+    void resume();
+    void setOneShot(bool isOneShot);
+    bool isShotted() const;
+    void update(int delta) override;
 
 private:
     int passTime = 0;         // 已过时间

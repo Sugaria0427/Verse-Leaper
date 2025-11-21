@@ -15,5 +15,3 @@ private:
     SDL_Texture* imgTexture;
     SDL_Surface* imgSurf;
 };
-
-

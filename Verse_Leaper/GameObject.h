@@ -1,15 +1,12 @@
 #pragma once
 #include <SDL_mixer.h>
-#include"Drawable.h"
-#include"Updatable.h"
-#include"Animation.h"
-#include"Box.h"
-#include"Vector2.h"
-#include"Camera.h"
-#include"Tag.h"
-
-#include"CollisionManager.h"
-#include<iostream>
+#include "Drawable.h"
+#include "Updatable.h"
+#include "Animation.h"
+#include "Box.h"
+#include "Vector2.h"
+#include "Tag.h"
+#include "CollisionManager.h"
 
 class GameObject :
     public Drawable, public Updatable

@@ -24,6 +24,6 @@ public:
 	void initDrum();
 private:
 	bool willDrop_ = false;
-	CollisionBox* drumBox = nullptr;	
+	CollisionBox* drumBox = nullptr;
 };
 

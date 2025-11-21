@@ -1,6 +1,5 @@
 #pragma once
 #include"Scene.h"
-#include"SceneManager.h"
 class OptionScene : 
     public Scene
 {

@@ -1,10 +1,9 @@
 #pragma once
-#include"GameObjectManager.h"
 #include"Entity.h"
-#include"Camera.h"
 #include"Timer.h"
 #include"Image.h"
-#include"Map.h"
+
+class Map;
 
 class Player : public Entity
 {

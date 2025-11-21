@@ -5,8 +5,6 @@
 #include "GameObject.h"
 #include "Enemy_sub.h"
 #include "Player.h"
-#include "utils.h"
-#include "ResourceManager.h"
 
 
 EnemyTigerIdleState::EnemyTigerIdleState(GameObject* owner) : StateNode(owner) {
@@ -36,7 +34,7 @@ void EnemyTigerIdleState::update(int delta) {
     // 更新计时器
     this->idleTimer_.update(delta);
     // 检查状态切换
-    EnemyTiger* tiger = dynamic_cast<EnemyTiger*>(this->getOwner());
+    Tiger* tiger = dynamic_cast<Tiger*>(this->getOwner());
     Player* player = dynamic_cast<Player*>(GameObjManager::instance()->getPlayer());
     if (tiger->IsDead()) 
         tiger->setState("Dead");
@@ -59,7 +57,7 @@ EnemyTigerAttackState::EnemyTigerAttackState(GameObject* owner) : StateNode(owne
 }
 
 void EnemyTigerAttackState::onEnter() {
-    EnemyTiger* tiger = dynamic_cast<EnemyTiger*>(this->getOwner());
+    Tiger* tiger = dynamic_cast<Tiger*>(this->getOwner());
     // 重置attack计时器
     this->attackStartup_.restart();
     this->attackTimer_.restart();
@@ -91,7 +89,7 @@ void EnemyTigerAttackState::update(int delta) {
     this->attackStartup_.update(delta);
     this->attackTimer_.update(delta);
     // 检查攻击前摇结束
-    EnemyTiger* tiger = dynamic_cast<EnemyTiger*>(this->getOwner());
+    Tiger* tiger = dynamic_cast<Tiger*>(this->getOwner());
     if (this->attackStartup_.isShotted()) {
         tiger->getBiteBox()->setCollidable(true);   // 攻击前摇结束后开启咬击碰撞箱
         // 播放攻击音效
@@ -108,7 +106,7 @@ void EnemyTigerAttackState::update(int delta) {
 }
 
 void EnemyTigerAttackState::onExit() {
-    EnemyTiger* tiger = dynamic_cast<EnemyTiger*>(this->getOwner());
+    Tiger* tiger = dynamic_cast<Tiger*>(this->getOwner());
     tiger->getBiteBox()->setCollidable(false);      // 退出攻击状态时关闭咬击碰撞箱
 	isPlayedAttack = false;
 	Mix_HaltChannel(tigerAttackChannel);
@@ -122,7 +120,7 @@ EnemyTigerMoveState::EnemyTigerMoveState(GameObject* owner) : StateNode(owner)
 
 void EnemyTigerMoveState::onEnter() {
     moveTimer_.restart();
-    EnemyTiger* tiger = dynamic_cast<EnemyTiger*>(this->getOwner());
+    Tiger* tiger = dynamic_cast<Tiger*>(this->getOwner());
     Player* player = dynamic_cast<Player*>(GameObjManager::instance()->getPlayer());
     if (!tiger->getAttackRange().isPointOn(player->getBoxCenterX(), player->getBoxCenterY())) {
         if (tiger->getBoxCenterX() >= player->getBoxCenterX()) {
@@ -151,7 +149,7 @@ void EnemyTigerMoveState::onEnter() {
 void EnemyTigerMoveState::update(int delta) {
     moveTimer_.update(delta);
     if(moveTimer_.isShotted()) {
-        EnemyTiger* tiger = dynamic_cast<EnemyTiger*>(this->getOwner());
+        Tiger* tiger = dynamic_cast<Tiger*>(this->getOwner());
         tiger->setState("Idle");    // 移动结束后切换回Idle状态
     }
 }
@@ -164,7 +162,7 @@ EnemyTigerJumpState::EnemyTigerJumpState(GameObject* owner) : StateNode(owner) {
 }
 
 void EnemyTigerJumpState::onEnter() {
-    EnemyTiger* tiger = dynamic_cast<EnemyTiger*>(this->getOwner());
+    Tiger* tiger = dynamic_cast<Tiger*>(this->getOwner());
     Player* player = dynamic_cast<Player*>(GameObjManager::instance()->getPlayer());
     // 设置跳跃朝向主角
     if (tiger->getBoxCenterX() >= player->getBoxCenterX()) {
@@ -181,7 +179,7 @@ void EnemyTigerJumpState::onEnter() {
 }
 
 void EnemyTigerJumpState::update(int delta) {
-    EnemyTiger* tiger = dynamic_cast<EnemyTiger*>(this->getOwner());
+    Tiger* tiger = dynamic_cast<Tiger*>(this->getOwner());
     if (tiger->isOnFloor())
         tiger->setState("Attack");  // 落地后切换到Attack状态
 }
@@ -193,13 +191,13 @@ void EnemyTigerJumpState::onExit() {
 EnemyTigerDeadState::EnemyTigerDeadState(GameObject* owner) : StateNode(owner) {}
 
 void EnemyTigerDeadState::onEnter() {
-    EnemyTiger* tiger = dynamic_cast<EnemyTiger*>(this->getOwner());
+    Tiger* tiger = dynamic_cast<Tiger*>(this->getOwner());
     Mix_PlayChannel(-1, ResourceManager::Instance().getSound(SoundType::die), 0);
     tiger->setSpeed(0, 0);
     tiger->setAtlas(ResourceManager::Instance().getAtlas(AtlasType::atlasEnemyTigerDead));
 }
 void EnemyTigerDeadState::update(int delta) {
-    EnemyTiger* enemy = dynamic_cast<EnemyTiger*>(this->getOwner());
+    Tiger* enemy = dynamic_cast<Tiger*>(this->getOwner());
     DropItem* dropItem = nullptr;
     if (enemy->willDrop()) {
         // 产生掉落物

@@ -1,14 +1,15 @@
 #pragma once
 #include "Enemy.h"
-class EnemyDog :
+
+class Dog :
     public Enemy
 {
 public:
-    EnemyDog(Tag _tag, Animation* _animation, Box* _EnemyBox);
-    EnemyDog(const EnemyDog& dog);
-    ~EnemyDog() {}
+    Dog(Tag _tag, Animation* _animation, Box* _EnemyBox);
+    Dog(const Dog& dog);
+    ~Dog() {}
     void initDog();
-    GameObject* clone() override { return new EnemyDog(*this); }
+    GameObject* clone() override { return new Dog(*this); }
     void update(int delta) override;
 
     Box& getChaseRange() { return chaseRange; }
@@ -17,29 +18,29 @@ private:
     Box chaseRange = Box();
 };
 
-class EnemyEagle :
+class Eagle :
     public Enemy
 {
 public:
-    EnemyEagle(Tag _tag, Animation* _animation, Box* _EnemyBox);
-    EnemyEagle(const EnemyEagle& Eagle);
-    ~EnemyEagle() {}
+    Eagle(Tag _tag, Animation* _animation, Box* _EnemyBox);
+    Eagle(const Eagle& Eagle);
+    ~Eagle() {}
     void initEagle();
     void update(int delta) override;
-    GameObject* clone() override { return new EnemyEagle(*this); }
+    GameObject* clone() override { return new Eagle(*this); }
 
     Box& getPatrolRange() { return patrolRange; }
 private:
     Box patrolRange = Box();
 };
 
-class EnemyTiger :
+class Tiger :
     public Enemy
 {
 public:
-    EnemyTiger(Tag _tag, Animation* _animation, Box* _EnemyBox);
-    EnemyTiger(const EnemyTiger& tiger);
-    ~EnemyTiger() {}
+    Tiger(Tag _tag, Animation* _animation, Box* _EnemyBox);
+    Tiger(const Tiger& tiger);
+    ~Tiger() {}
     void initTiger();
     GameObject* clone() override;
     void update(int delta) override;
@@ -56,13 +57,13 @@ private:
     Box jumpRange = Box();
 };
 
-class EnemyBoss :
+class Boss :
     public Enemy
 {
 public:
-    EnemyBoss(Tag _tag, Animation* _animation, Box* _EnemyBox);
-    EnemyBoss(const EnemyBoss& boss);
-    ~EnemyBoss() {}
+    Boss(Tag _tag, Animation* _animation, Box* _EnemyBox);
+    Boss(const Boss& boss);
+    ~Boss() {}
     void initBoss();
     GameObject* clone() override;
     void update(int delta) override;

@@ -25,6 +25,8 @@ public:
         currentMap_->onUpdate(delta);
     }
 
+    void creatMaps();
+
     void setInitialMap(std::string mapName);
     void switchMap(std::string mapName);
     void switchMap(Map* map);

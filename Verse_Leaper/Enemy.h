@@ -1,6 +1,5 @@
 #pragma once
 #include "Entity.h"
-#include "GameObjectManager.h"
 #include"Timer.h"
 
 class Enemy :

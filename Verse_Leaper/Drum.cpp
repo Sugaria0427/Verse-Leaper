@@ -1,5 +1,6 @@
 #include "Drum.h"
 #include "GameObjFactory.h"
+#include "GameObjectManager.h"
 #include <iostream>
 
 Drum::Drum(Tag _tag, Animation* _animation, Box* _box) :

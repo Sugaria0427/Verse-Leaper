@@ -3,6 +3,7 @@
 #include "Enemy_sub.h"
 #include "Box.h"
 #include "ResourceManager.h"
+#include "GameObjectManager.h"
 
 EnemyDogPatrolState::EnemyDogPatrolState(GameObject* owner) : StateNode(owner)
 {
@@ -32,7 +33,7 @@ void EnemyDogPatrolState::onEnter() {
         enemy->setState("Goback");  // 如果不在初始位置，切换到回归状态
 }
 void EnemyDogPatrolState::update(int delta) {
-    EnemyDog* dog = dynamic_cast<EnemyDog*>(this->getOwner());
+    Dog* dog = dynamic_cast<Dog*>(this->getOwner());
     Player* player = dynamic_cast<Player*>(GameObjManager::instance()->getPlayer());
     if (dog->getInvincible()) {
         dog->setState("Hurt");
@@ -148,7 +149,7 @@ void EnemyDogGobakState::onExit() {
 }
 
 void EnemyDogChaseState::onEnter() {
-    EnemyDog* dog = dynamic_cast<EnemyDog*>(this->getOwner());
+    Dog* dog = dynamic_cast<Dog*>(this->getOwner());
     dog->getChaseRange().setBoxPosition(dog->getBoxCenterX() - dog->getChaseRange().getWidth() / 2,
         dog->getBoxCenterY() - dog->getChaseRange().getHeight() / 2);
 	dogRunChannel = Mix_PlayChannel(-1, ResourceManager::Instance().getSound(SoundType::dogRun), 0);
@@ -156,7 +157,7 @@ void EnemyDogChaseState::onEnter() {
 }
 void EnemyDogChaseState::update(int delta) {
     // 获取敌人和玩家对象
-    EnemyDog* dog = dynamic_cast<EnemyDog*>(this->getOwner());
+    Dog* dog = dynamic_cast<Dog*>(this->getOwner());
     Player* player = dynamic_cast<Player*>(GameObjManager::instance()->getPlayer());
     // 更新追逐范围
     dog->getChaseRange().setBoxPosition(dog->getBoxCenterX() - dog->getChaseRange().getWidth() / 2,

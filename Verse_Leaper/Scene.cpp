@@ -1,5 +1,20 @@
 #include "Scene.h"
 
+// ctor & dtor
+Scene::Scene(Image* backgroundImage, std::vector<Button*>& btnVec)
+    : backgroundImage(backgroundImage), buttonVec(btnVec) {
+}
+
+Scene::~Scene() {
+    delete backgroundImage;
+    backgroundImage = nullptr;
+    for (Button* btn : buttonVec) {
+        delete btn;
+        btn = nullptr;
+    }
+    buttonVec.clear();
+}
+
 void Scene::draw(SDL_Renderer* SDL_renderer) {
     drawBackground(SDL_renderer);
     drawButtonVec(SDL_renderer);

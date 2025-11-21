@@ -1,6 +1,8 @@
 #pragma once
+#include <iostream>
 #include "GameObject.h"
-#include "StateMacine.h"
+#include "StateMachine.h"
+
 class Entity :
     public GameObject
 {
@@ -19,8 +21,8 @@ public:
         this->isExist_ = isExist_;
         entityBox->setCollidable(isExist_);
     }
-    StateMacine& getStateMacine() { return stateMacine; }
-    void setState(std::string state) { stateMacine.switchTo(state); }
+    StateMachine& getStateMachine() { return stateMachine; }
+    void setState(std::string state);
 	void setOnFloor(bool onFloor) { isOnFloor_ = onFloor; }
 	bool isOnFloor() const { return isOnFloor_; }
     // »ñÈ¡Åö×²Ïä
@@ -36,7 +38,7 @@ public:
     void setInitPosition(const Vector2& position) { initPosition = position; }
 protected:
     CollisionBox* entityBox = nullptr;
-    StateMacine stateMacine;
+    StateMachine stateMachine;
     bool isOnFloor_ = false;
     Vector2 initPosition = { 0,0 };
 };

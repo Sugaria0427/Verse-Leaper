@@ -1,4 +1,6 @@
 #include "OptionScene.h"
+#include "SceneManager.h"
+#include "MouseInput.h"
 
 void OptionScene::handleEvent(SDL_Event& event)
 {
@@ -7,7 +9,7 @@ void OptionScene::handleEvent(SDL_Event& event)
     case SDL_MOUSEBUTTONDOWN:
         break;
     case SDL_MOUSEBUTTONUP:
-        SceneManager::Instance()->switchTo(SceneManager::SceneType::Menu);
+        SceneManager::Instance()->switchTo(SceneType::Menu);
         break;
     }
 }

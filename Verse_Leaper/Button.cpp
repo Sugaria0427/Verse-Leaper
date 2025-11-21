@@ -1,6 +1,10 @@
 #include "Button.h"
+#include "Image.h"
+#include "MouseInput.h"
 
-extern Camera* camera;
+Button::Button(int x, int y, int width, int height, Name name, Image* buttonImage)
+    : Box(x, y, width, height), isHover(false), name(name), buttonImage(buttonImage) {
+}
 
 void Button::draw(SDL_Renderer* SDL_renderer) {
     if (isHover) {  //»æÖÆhover×´Ì¬ÏÂ°´Å¥
@@ -27,13 +31,13 @@ bool Button::isMouseOn(MouseInput& msInput)
     return isHover;
 }
 
-void Button::updateButtonHover(MouseInput& msInput, std::vector<Button*>& buttons) {
+void Button::updateButtonsHover(MouseInput& msInput, std::vector<Button*>& buttons) {
     for (Button* button : buttons) {
         button->isMouseOn(msInput);
     }
 }
 
-Button::Name Button::findHoverInVec(std::vector<Button*>& buttons)
+Button::Name Button::findHoverButton(std::vector<Button*>& buttons)
 {
     for (Button* btn : buttons) {
         if (btn->isHover) {

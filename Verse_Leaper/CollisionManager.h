@@ -1,9 +1,8 @@
 #pragma once
 #include<vector>
 #include"CollisionBox.h"
-#include"Camera.h"
-#include"GameObject.h"
-#include"MapManager.h"
+
+class GameObject;
 
 class CollisionManager
 {

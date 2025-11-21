@@ -1,10 +1,14 @@
 #include "Player.h"
+
 #include "PlayerIdleState.h"
 #include "PlayerRunState.h"
 #include "PlayerJumpState.h"
 #include "PlayerArrowState.h"
+
 #include "Panel.h"
 #include "ResourceManager.h"
+#include "GameObjectManager.h"
+#include "MapManager.h"
 
 Player::Player(Tag _tag, Animation* _animation, Animation* swordAnimation_, Animation* arrowAnimation_, Box* _playerBox, int initHP, int initAD, int MaxHP)
     : Entity(_tag, _animation, _playerBox, initHP, initAD, MaxHP), swordAnimation_(swordAnimation_), arrowAnimation_(arrowAnimation_) {
@@ -81,12 +85,12 @@ void Player::initPlayerCtor()
     this->lastSavePointMap_ = MapManager::instance()->getCurrentMap();
     /// 有限状态机
     {
-        stateMacine = StateMacine();
-        stateMacine.addStateNode("Idle", new PlayerIdleState(this));
-        stateMacine.addStateNode("Run", new PlayerRunState(this));
-        stateMacine.addStateNode("Jump", new PlayerJumpState(this));
-        stateMacine.addStateNode("Arrow", new PlayerArrowState(this));
-        stateMacine.setInitState("Idle");
+        stateMachine = StateMachine();
+        stateMachine.addStateNode("Idle", new PlayerIdleState(this));
+        stateMachine.addStateNode("Run", new PlayerRunState(this));
+        stateMachine.addStateNode("Jump", new PlayerJumpState(this));
+        stateMachine.addStateNode("Arrow", new PlayerArrowState(this));
+        stateMachine.setInitState("Idle");
     }
     
     /// 持续时间计时器
@@ -100,10 +104,10 @@ void Player::initPlayerCtor()
                 this->setUsingAlcohol(false);
                 this->setAD(1);
                 for (GameObject* obj : GameObjManager::instance()->getVec()) {
-                    if (obj->getTag() == Tag::Block_Cloud1 && obj->isExist()) {
+                    if (obj->getTag() == Tag::Block_Cloud_Red && obj->isExist()) {
                         obj->setExist(false);
                     }
-                    if (obj->getTag() == Tag::Block_Cloud2 && obj->isExist()) {
+                    if (obj->getTag() == Tag::Block_Cloud_Blue && obj->isExist()) {
                         obj->setExist(false);
                     }
                 }
@@ -282,10 +286,10 @@ void Player::useSword()
 void Player::useAlcohol() {
     if (!isInAlcoholCD) {
        for(GameObject* obj : GameObjManager::instance()->getVec()){
-            if(obj->getTag() == Tag::Block_Cloud1 && !obj->isExist()){
+            if(obj->getTag() == Tag::Block_Cloud_Red && !obj->isExist()){
                 obj->setExist(true);
             }
-            if (obj->getTag() == Tag::Block_Cloud2 && !obj->isExist()) {
+            if (obj->getTag() == Tag::Block_Cloud_Blue && !obj->isExist()) {
                 obj->setExist(true);
             }
         }
